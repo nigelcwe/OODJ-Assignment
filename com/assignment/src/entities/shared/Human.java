@@ -1,6 +1,6 @@
 package com.assignment.src.entities.shared;
 
-public class Human extends Entity {
+public abstract class Human extends Entity {
     public String firstName;
     public String lastName;
     public String fullName;
@@ -13,7 +13,7 @@ public class Human extends Entity {
         this.lastName = lastName;
         this.phoneNum = phoneNum;
         this.email = email;
-        this.fullName = firstName + lastName;
+        this.fullName = firstName + " " + lastName;
     }
 
     public String getFirstName() {
