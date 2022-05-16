@@ -1,7 +1,10 @@
 package com.assignment.src.entities.staff;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 public interface StaffPort {
-    Staff[] getAllStaff();
+    ArrayList<String[]> getAllStaff() throws IOException;
     Staff getById(int id);
     Staff getByUsername(String username);
     int modifyStaff(Staff staff);
