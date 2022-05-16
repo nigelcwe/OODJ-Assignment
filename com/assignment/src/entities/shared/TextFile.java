@@ -2,30 +2,25 @@ package com.assignment.src.entities.shared;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class TextFile {
 
-    public int append(File file, String[] array) throws java.io.IOException {
+    public void append(File file, String[] array) throws java.io.IOException {
         String strFinal = String.join(Separator.Comma.toString(), array);
 
         BufferedWriter wr = new BufferedWriter(new FileWriter(file, true));
         wr.write(strFinal);
         wr.newLine();
         wr.close();
-
-        return 1;
     }
 
-    public int write(String path, String[] array) throws java.io.IOException {
-        File file = new File(path);
-        String strFinal = String.join(Separator.Comma.toString(), array);
-
+    public void write(File file, ArrayList<String[]> arrayList) throws java.io.IOException {
         BufferedWriter wr = new BufferedWriter(new FileWriter(file, false));
-        wr.write(strFinal);
+        wr.write("");
         wr.close();
-        return 1;
+        for (String[] i : arrayList) {
+            this.append(file, i);
+        }
     }
 
     public ArrayList<String[]> readAll(File file) throws java.io.IOException {
