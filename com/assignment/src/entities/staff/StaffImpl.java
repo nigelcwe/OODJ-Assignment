@@ -77,7 +77,6 @@ public class StaffImpl implements StaffPort {
 
     @Override
     public int deleteStaff(Staff staff) throws IOException {
-        TextFile tf = new TextFile();
         ArrayList<String[]> oldAllStaff = new ArrayList<>();
         oldAllStaff.addAll(allStaff);
         updateAllStaff();
@@ -119,7 +118,6 @@ public class StaffImpl implements StaffPort {
                 staff.icNum,
                 staff.role.toString()
         };
-        TextFile tf = new TextFile();
         tf.append(file, newStaff);
         return 0;
     }
