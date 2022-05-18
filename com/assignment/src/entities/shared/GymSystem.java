@@ -8,15 +8,11 @@ import com.assignment.src.entities.staff.StaffImpl;
 import java.io.IOException;
 
 public class GymSystem {
-    public StaffImpl staff;
-    public BookingImpl booking;
-    public CustomerImpl customer;
-    public ReportImpl report;
+    public final StaffImpl staff = new StaffImpl();
+    public final BookingImpl booking = new BookingImpl();
+    public final CustomerImpl customer = new CustomerImpl();
+    public final ReportImpl report = new ReportImpl();
 
     public GymSystem() throws IOException {
-        this.staff = new StaffImpl();
-        this.booking = new BookingImpl();
-        this.customer = new CustomerImpl();
-        this.report = new ReportImpl();
     }
 }
