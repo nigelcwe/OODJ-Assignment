@@ -4,15 +4,10 @@ import com.assignment.src.entities.shared.Entity;
 import java.time.LocalDateTime;
 
 public class Booking extends Entity {
-    public int customerId;
-    public int trainerId;
-    public LocalDateTime creationDate;
-    public LocalDateTime startTime;
-    public LocalDateTime endTime;
+    public int customerId, trainerId, feedback;
+    public LocalDateTime creationDate, startTime, endTime;
     public double price;
-    public boolean isCompleted;
-    public boolean isPaid;
-    public int feedback;
+    public boolean isCompleted, isPaid;
 
     public Booking(int id, int customerId, int trainerId, LocalDateTime creationDate, LocalDateTime startTime, LocalDateTime endTime, double price, boolean isCompleted, boolean isPaid, int feedback) {
         super(id);

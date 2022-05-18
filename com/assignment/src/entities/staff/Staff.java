@@ -3,9 +3,7 @@ package com.assignment.src.entities.staff;
 import com.assignment.src.entities.shared.Human;
 
 public class Staff extends Human {
-    public String username;
-    public String password;
-    public String icNum;
+    public String username, password, icNum;
     public Role role;
 
     public Staff(int id, String firstName, String lastName, String phoneNum, String email, String username, String password, String icNum, Role role) {
