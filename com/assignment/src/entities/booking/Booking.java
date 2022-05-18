@@ -12,9 +12,9 @@ public class Booking extends Entity {
     public double price;
     public boolean isCompleted;
     public boolean isPaid;
-    public String feedback;
+    public int feedback;
 
-    public Booking(int id, int customerId, int trainerId, LocalDateTime creationDate, LocalDateTime startTime, LocalDateTime endTime, double price, boolean isCompleted, boolean isPaid, String feedback) {
+    public Booking(int id, int customerId, int trainerId, LocalDateTime creationDate, LocalDateTime startTime, LocalDateTime endTime, double price, boolean isCompleted, boolean isPaid, int feedback) {
         super(id);
         this.customerId = customerId;
         this.trainerId = trainerId;

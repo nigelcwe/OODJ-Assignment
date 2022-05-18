@@ -2,7 +2,6 @@ package com.assignment.src.entities.booking;
 
 import com.assignment.src.entities.shared.FileSelection;
 import com.assignment.src.entities.shared.TextFile;
-
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -41,7 +40,7 @@ public class BookingImpl implements BookingPort {
                         Double.parseDouble(i[6]),
                         Boolean.parseBoolean(i[7]),
                         Boolean.parseBoolean(i[8]),
-                        i[9]
+                        Integer.parseInt(i[9])
                 );
             }
         }
@@ -149,7 +148,7 @@ public class BookingImpl implements BookingPort {
                 i[6] = Double.toString(booking.price);
                 i[7] = Boolean.toString(booking.isCompleted);
                 i[8] = Boolean.toString(booking.isPaid);
-                i[9] = booking.feedback;
+                i[9] = Integer.toString(booking.feedback);
                 break;
             }
         }
@@ -197,7 +196,7 @@ public class BookingImpl implements BookingPort {
                 Double.toString(booking.price),
                 Boolean.toString(booking.isCompleted),
                 Boolean.toString(booking.isPaid),
-                booking.feedback
+                Integer.toString(booking.feedback)
         };
         tf.append(file, newBooking);
         return 0;
