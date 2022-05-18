@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public interface BookingPort {
+    int generateId() throws IOException;
     ArrayList<String[]> getAllBooking();
     Booking getById(int id);
     ArrayList<String[]> getByCustomerId(int id);

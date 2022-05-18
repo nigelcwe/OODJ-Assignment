@@ -4,6 +4,7 @@ import com.assignment.src.entities.shared.TextFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class StaffImpl implements StaffPort {
     private final File file = new File(FileSelection.Staff.toString());
@@ -15,6 +16,15 @@ public class StaffImpl implements StaffPort {
 
     public void updateAllStaff() throws IOException {
         this.allStaff = tf.readAll(file);
+    }
+
+    @Override
+    public int generateId() throws IOException {
+        ArrayList<String[]> reverseAllStaff = new ArrayList<>();
+        reverseAllStaff.addAll(allStaff);
+        updateAllStaff();
+        Collections.reverse(reverseAllStaff);
+        return Integer.parseInt(reverseAllStaff.get(0)[0]) + 1;
     }
 
     @Override

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ReportImpl implements ReportPort {
     private final File file = new File(FileSelection.Report.toString());
@@ -19,6 +20,15 @@ public class ReportImpl implements ReportPort {
 
     public void updateAllReport() throws IOException {
         this.allReport = tf.readAll(file);
+    }
+
+    @Override
+    public int generateId() throws IOException {
+        ArrayList<String[]> reverseAllReport = new ArrayList<>();
+        reverseAllReport.addAll(allReport);
+        updateAllReport();
+        Collections.reverse(reverseAllReport);
+        return Integer.parseInt(reverseAllReport.get(0)[0]) + 1;
     }
 
     @Override

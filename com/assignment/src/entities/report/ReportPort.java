@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public interface ReportPort {
+    int generateId() throws IOException;
     ArrayList<String[]> getAllReport();
     Report getById(int id);
     ArrayList<String[]> getByCustomerId(int id);

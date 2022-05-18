@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class BookingImpl implements BookingPort {
     private final File file = new File(FileSelection.Booking.toString());
@@ -19,6 +20,15 @@ public class BookingImpl implements BookingPort {
 
     public void updateAllBooking() throws IOException {
         this.allBooking = tf.readAll(file);
+    }
+
+    @Override
+    public int generateId() throws IOException {
+        ArrayList<String[]> reverseAllBooking = new ArrayList<>();
+        reverseAllBooking.addAll(allBooking);
+        updateAllBooking();
+        Collections.reverse(reverseAllBooking);
+        return Integer.parseInt(reverseAllBooking.get(0)[0]) + 1;
     }
 
     @Override

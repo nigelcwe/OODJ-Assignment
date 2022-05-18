@@ -6,6 +6,7 @@ import com.assignment.src.entities.shared.TextFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class CustomerImpl implements CustomerPort {
     private final File file = new File(FileSelection.Customer.toString());
@@ -17,6 +18,15 @@ public class CustomerImpl implements CustomerPort {
 
     public void updateAllCustomer() throws IOException {
         allCustomer = tf.readAll(file);
+    }
+
+    @Override
+    public int generateId() throws IOException {
+        ArrayList<String[]> reverseAllCustomer = new ArrayList<>();
+        reverseAllCustomer.addAll(allCustomer);
+        updateAllCustomer();
+        Collections.reverse(reverseAllCustomer);
+        return Integer.parseInt(reverseAllCustomer.get(0)[0]) + 1;
     }
 
     @Override
