@@ -13,6 +13,6 @@ public class GymSystem {
     public final CustomerImpl customer = new CustomerImpl();
     public final ReportImpl report = new ReportImpl();
 
-    public GymSystem() throws IOException {
+    public GymSystem() throws Exception {
     }
 }
