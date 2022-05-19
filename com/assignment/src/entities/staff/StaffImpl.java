@@ -10,6 +10,7 @@ public class StaffImpl implements StaffPort {
     private final File file = new File(FileSelection.Staff.toString());
     private final TextFile tf = new TextFile();
     private ArrayList<String[]> allStaff = tf.readAll(file);
+    public final String[] invalidChars = {"(", ")","{", "}", "[", "]", "|", "`", "\\", "\"", "!", "@", "#", "$", "%", "^", "&", "*", ":", ";", "-", "_", "=", "+"};
 
     public StaffImpl() throws IOException {
     }
@@ -36,7 +37,17 @@ public class StaffImpl implements StaffPort {
     public Staff getById(int id) {
         for (String[] i : allStaff) {
             if (Integer.parseInt(i[0]) == id) {
-                return new Staff(Integer.parseInt(i[0]), i[1], i[2], i[3], i[4], i[5], i[6], i[7], Role.valueOf(i[8]));
+                return new Staff(
+                        Integer.parseInt(i[0]),
+                        i[1],
+                        i[2],
+                        i[3],
+                        i[4],
+                        i[5],
+                        i[6],
+                        i[7],
+                        Role.valueOf(i[8])
+                );
             }
         }
         return null;
@@ -46,7 +57,17 @@ public class StaffImpl implements StaffPort {
     public Staff getByUsername(String username) {
         for (String[] i : allStaff) {
             if (i[5].equals(username)) {
-                return new Staff(Integer.parseInt(i[0]), i[1], i[2], i[3], i[4], i[5], i[6], i[7], Role.valueOf(i[8]));
+                return new Staff(
+                        Integer.parseInt(i[0]),
+                        i[1],
+                        i[2],
+                        i[3],
+                        i[4],
+                        i[5],
+                        i[6],
+                        i[7],
+                        Role.valueOf(i[8])
+                );
             }
         }
         return null;
@@ -105,15 +126,6 @@ public class StaffImpl implements StaffPort {
         else return 1;
     }
 
-    @Override
-    public int login(String username, String password) {
-        for (String[] i : allStaff) {
-            if ((username.equals(i[5])) && (password.equals(i[6]))) return 0;
-        }
-        return 1;
-    }
-
-
 //    no validation performed here, please validate before using
     @Override
     public int createStaff(Staff staff) throws IOException {
@@ -129,6 +141,34 @@ public class StaffImpl implements StaffPort {
                 staff.role.toString()
         };
         tf.append(file, newStaff);
+        return 0;
+    }
+
+    @Override
+    public Staff login(String username, String password) {
+        for (String[] i : allStaff) {
+            if ((username.equals(i[5])) && (password.equals(i[6]))) {
+                return new Staff(
+                        Integer.parseInt(i[1]),
+                        i[1],
+                        i[2],
+                        i[3],
+                        i[4],
+                        i[5],
+                        i[6],
+                        i[7],
+                        Role.valueOf(i[8])
+                );
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public int validation(String usernameOrPassword) {
+        for (String i : invalidChars) {
+            if (usernameOrPassword.contains(i)) return 1;
+        }
         return 0;
     }
 }
