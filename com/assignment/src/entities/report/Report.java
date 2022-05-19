@@ -8,9 +8,8 @@ public class Report extends Entity {
     public double paymentAmount;
     public boolean isPaid;
     public LocalDateTime creationDate, paymentDate, startTime, endTime;
-    public int feedback;
 
-    public Report(int id, int customerId, int trainerId, int managerId, double paymentAmount, boolean isPaid, LocalDateTime creationDate, LocalDateTime paymentDate, LocalDateTime startTime, LocalDateTime endTime, int feedback) {
+    public Report(int id, int customerId, int trainerId, int managerId, double paymentAmount, boolean isPaid, LocalDateTime creationDate, LocalDateTime paymentDate, LocalDateTime startTime, LocalDateTime endTime) {
         super(id);
         this.customerId = customerId;
         this.trainerId = trainerId;
@@ -21,6 +20,5 @@ public class Report extends Entity {
         this.paymentDate = paymentDate;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.feedback = feedback;
     }
 }

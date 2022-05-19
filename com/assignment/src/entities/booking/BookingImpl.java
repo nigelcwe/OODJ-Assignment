@@ -50,7 +50,7 @@ public class BookingImpl implements BookingPort {
                         Double.parseDouble(i[6]),
                         Boolean.parseBoolean(i[7]),
                         Boolean.parseBoolean(i[8]),
-                        Integer.parseInt(i[9])
+                        i[9]
                 );
             }
         }
@@ -158,7 +158,7 @@ public class BookingImpl implements BookingPort {
                 i[6] = Double.toString(booking.price);
                 i[7] = Boolean.toString(booking.isCompleted);
                 i[8] = Boolean.toString(booking.isPaid);
-                i[9] = Integer.toString(booking.feedback);
+                i[9] = booking.feedback;
                 break;
             }
         }
@@ -206,7 +206,7 @@ public class BookingImpl implements BookingPort {
                 Double.toString(booking.price),
                 Boolean.toString(booking.isCompleted),
                 Boolean.toString(booking.isPaid),
-                Integer.toString(booking.feedback)
+                booking.feedback
         };
         tf.append(file, newBooking);
         return 0;

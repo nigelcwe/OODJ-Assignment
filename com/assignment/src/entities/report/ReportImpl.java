@@ -50,8 +50,7 @@ public class ReportImpl implements ReportPort {
                         LocalDateTime.parse(i[6], formatter),
                         LocalDateTime.parse(i[7], formatter),
                         LocalDateTime.parse(i[8], formatter),
-                        LocalDateTime.parse(i[9], formatter),
-                        Integer.parseInt(i[10])
+                        LocalDateTime.parse(i[9], formatter)
                 );
             }
         }
@@ -160,7 +159,6 @@ public class ReportImpl implements ReportPort {
                 i[7] = report.paymentDate.format(formatter);
                 i[8] = report.startTime.format(formatter);
                 i[9] = report.endTime.format(formatter);
-                i[10] = Integer.toString(report.feedback);
                 break;
             }
         }
@@ -189,8 +187,7 @@ public class ReportImpl implements ReportPort {
                 report.creationDate.format(formatter),
                 report.paymentDate.format(formatter),
                 report.startTime.format(formatter),
-                report.endTime.format(formatter),
-                Integer.toString(report.feedback)
+                report.endTime.format(formatter)
         };
         tf.append(file, newReport);
         return 0;
