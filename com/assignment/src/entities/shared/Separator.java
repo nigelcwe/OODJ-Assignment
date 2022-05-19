@@ -2,7 +2,7 @@ package com.assignment.src.entities.shared;
 
 public enum Separator {
     Comma(","),
-    Apostrophe("'");
+    VerticalBar("|");
 
     private final String value;
 
