@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public interface StaffPort {
     int generateId() throws IOException;
     ArrayList<String[]> getAllStaff() throws IOException;
+    ArrayList<String[]> getByRole(Role role);
     Staff getById(int id);
     Staff getByUsername(String username);
     int modifyStaff(Staff staff) throws IOException;

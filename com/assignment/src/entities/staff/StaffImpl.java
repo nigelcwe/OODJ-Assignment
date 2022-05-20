@@ -3,6 +3,7 @@ import com.assignment.src.entities.shared.FileSelection;
 import com.assignment.src.entities.shared.TextFile;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -31,6 +32,20 @@ public class StaffImpl implements StaffPort {
     @Override
     public ArrayList<String[]> getAllStaff() {
         return allStaff;
+    }
+
+    @Override
+    public ArrayList<String[]> getByRole(Role role) {
+        ArrayList<String[]> finalArrayList = new ArrayList<>();
+
+        for (String[] i : allStaff) {
+            if (i[8].equals(role.toString())) {
+                finalArrayList.add(i);
+            }
+        }
+
+        if (finalArrayList.size() > 0) {return finalArrayList;}
+        else {return null;}
     }
 
     @Override
