@@ -11,9 +11,11 @@ import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.properties.HorizontalAlignment;
+import com.itextpdf.layout.properties.TextAlignment;
 
 import java.io.File;
 import java.io.IOException;
@@ -176,12 +178,12 @@ public class ReportImpl implements ReportPort {
         Table table = new Table(columnWidths).setHorizontalAlignment(HorizontalAlignment.CENTER);
 
 //        Adding Header Cells
-        table.addHeaderCell(new Paragraph("ID").setFont(courierBold).setFontSize(14))
-                .addHeaderCell(new Paragraph("Trainer Name").setFont(courierBold).setFontSize(14))
-                .addHeaderCell(new Paragraph("Sales").setFont(courierBold).setFontSize(14))
-                .addHeaderCell(new Paragraph("Revenue").setFont(courierBold).setFontSize(14))
-                .addHeaderCell(new Paragraph("Commission").setFont(courierBold).setFontSize(14))
-                .addHeaderCell(new Paragraph("Profit").setFont(courierBold).setFontSize(14));
+        table.addHeaderCell(new Paragraph("ID").setFont(courierBold).setFontSize(14).setTextAlignment(TextAlignment.CENTER))
+                .addHeaderCell(new Paragraph("Trainer Name").setFont(courierBold).setFontSize(14).setTextAlignment(TextAlignment.CENTER))
+                .addHeaderCell(new Paragraph("Sales").setFont(courierBold).setFontSize(14).setTextAlignment(TextAlignment.CENTER))
+                .addHeaderCell(new Paragraph("Revenue").setFont(courierBold).setFontSize(14).setTextAlignment(TextAlignment.CENTER))
+                .addHeaderCell(new Paragraph("Commission").setFont(courierBold).setFontSize(14).setTextAlignment(TextAlignment.CENTER))
+                .addHeaderCell(new Paragraph("Profit").setFont(courierBold).setFontSize(14).setTextAlignment(TextAlignment.CENTER));
 
         double totalProfit = 0;
 
@@ -202,14 +204,16 @@ public class ReportImpl implements ReportPort {
             totalProfit = totalProfit + profit;
 
 //            Adding Content Cells
-            table.addCell(new Paragraph(Integer.toString(trainer.id)).setFont(courier).setFontSize(12))
-                    .addCell(new Paragraph(trainer.fullName).setFont(courier).setFontSize(12))
-                    .addCell(new Paragraph(Integer.toString(sales)).setFont(courier).setFontSize(12))
-                    .addCell(new Paragraph(Double.toString(revenue)).setFont(courier).setFontSize(12))
-                    .addCell(new Paragraph(Double.toString(commission)).setFont(courier).setFontSize(12))
-                    .addCell(new Paragraph(Double.toString(profit)).setFont(courier).setFontSize(12));
+            table.addCell(new Paragraph(Integer.toString(trainer.id)).setFont(courier).setFontSize(12).setTextAlignment(TextAlignment.RIGHT))
+                    .addCell(new Paragraph(trainer.fullName).setFont(courier).setFontSize(12).setTextAlignment(TextAlignment.LEFT))
+                    .addCell(new Paragraph(Integer.toString(sales)).setFont(courier).setFontSize(12).setTextAlignment(TextAlignment.RIGHT))
+                    .addCell(new Paragraph(Double.toString(revenue)).setFont(courier).setFontSize(12).setTextAlignment(TextAlignment.RIGHT))
+                    .addCell(new Paragraph(Double.toString(commission)).setFont(courier).setFontSize(12).setTextAlignment(TextAlignment.RIGHT))
+                    .addCell(new Paragraph(Double.toString(profit)).setFont(courier).setFontSize(12).setTextAlignment(TextAlignment.RIGHT));
         }
 
+        Cell cell = new Cell(1, 5).add(new Paragraph("Total Paid:")).setFont(courierBold).setFontSize(14).setTextAlignment(TextAlignment.CENTER);
+        table.addFooterCell(cell).addFooterCell(new Paragraph(Double.toString(totalProfit)).setFont(courierBold).setFontSize(14).setTextAlignment(TextAlignment.RIGHT));
 
         doc.add(table);
 
