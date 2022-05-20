@@ -1,3 +1,3 @@
-0|John|Doe|+65929576924|johndoe@yahoo.com|johndoe|johndoe1234|846683658375|Manager
-1|Jane|Doe|+60648365836|janedoe@hotmail.com|janedoe|janedoe1234|710673859703|Trainer
-2|Joe|Blow|+60121234567|joeblow@gmail.com|joeblow|joeblow1234|012345678912|Manager
+0_John_Doe_+65929576924_johndoe@yahoo.com_johndoe_johndoe1234_846683658375_Manager
+1_Jane_Doe_+60648365836_janedoe@hotmail.com_janedoe_janedoe1234_710673859703_Trainer
+2_Joe_Blow_+60121234567_joeblow@gmail.com_joeblow_joeblow1234_012345678912_Manager
