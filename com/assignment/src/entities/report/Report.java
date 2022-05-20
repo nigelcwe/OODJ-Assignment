@@ -13,7 +13,7 @@ public class Report extends Entity {
         this.customerId = customerId;
         this.trainerId = trainerId;
         this.paymentAmount = paymentAmount;
-        this.commission = paymentAmount * 80 / 100;
+        this.commission = paymentAmount * 65 / 100;
         this.creationDate = creationDate;
     }
 }

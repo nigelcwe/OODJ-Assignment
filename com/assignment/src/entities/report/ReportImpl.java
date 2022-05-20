@@ -171,7 +171,7 @@ public class ReportImpl implements ReportPort {
         PdfFont courierBold = PdfFontFactory.createFont(StandardFonts.COURIER_BOLD);
         PdfFont courier = PdfFontFactory.createFont(StandardFonts.COURIER);
 
-        Paragraph title = new Paragraph("Monthly Report").setFontSize(20).setFont(courierBold);
+        Paragraph title = new Paragraph("MONTHLY REPORT FOR " + date.getMonth().toString() + " " + date.getYear()).setFontSize(20).setFont(courierBold);
         doc.add(title);
 
         float[] columnWidths = {45F, 160F, 45F, 90F, 90F, 90F};
@@ -179,11 +179,11 @@ public class ReportImpl implements ReportPort {
 
 //        Adding Header Cells
         table.addHeaderCell(new Paragraph("ID").setFont(courierBold).setFontSize(14).setTextAlignment(TextAlignment.CENTER))
-                .addHeaderCell(new Paragraph("Trainer Name").setFont(courierBold).setFontSize(14).setTextAlignment(TextAlignment.CENTER))
-                .addHeaderCell(new Paragraph("Sales").setFont(courierBold).setFontSize(14).setTextAlignment(TextAlignment.CENTER))
-                .addHeaderCell(new Paragraph("Revenue").setFont(courierBold).setFontSize(14).setTextAlignment(TextAlignment.CENTER))
-                .addHeaderCell(new Paragraph("Commission").setFont(courierBold).setFontSize(14).setTextAlignment(TextAlignment.CENTER))
-                .addHeaderCell(new Paragraph("Profit").setFont(courierBold).setFontSize(14).setTextAlignment(TextAlignment.CENTER));
+                .addHeaderCell(new Paragraph("TRAINER NAME").setFont(courierBold).setFontSize(14).setTextAlignment(TextAlignment.CENTER))
+                .addHeaderCell(new Paragraph("SALES").setFont(courierBold).setFontSize(14).setTextAlignment(TextAlignment.CENTER))
+                .addHeaderCell(new Paragraph("REVENUE").setFont(courierBold).setFontSize(14).setTextAlignment(TextAlignment.CENTER))
+                .addHeaderCell(new Paragraph("COMMISSION").setFont(courierBold).setFontSize(14).setTextAlignment(TextAlignment.CENTER))
+                .addHeaderCell(new Paragraph("PROFIT").setFont(courierBold).setFontSize(14).setTextAlignment(TextAlignment.CENTER));
 
         double totalProfit = 0;
 
@@ -214,7 +214,7 @@ public class ReportImpl implements ReportPort {
 
 
 //        Adding Footer Cells
-        Cell cell = new Cell(1, 5).add(new Paragraph("Total Paid:")).setFont(courierBold).setFontSize(14).setTextAlignment(TextAlignment.CENTER);
+        Cell cell = new Cell(1, 5).add(new Paragraph("TOTAL PROFIT:")).setFont(courierBold).setFontSize(14).setTextAlignment(TextAlignment.CENTER);
         table.addFooterCell(cell).addFooterCell(new Paragraph(Double.toString(totalProfit)).setFont(courierBold).setFontSize(14).setTextAlignment(TextAlignment.RIGHT));
 
         doc.add(table);
