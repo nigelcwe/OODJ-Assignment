@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class TextFile {
 
     public void append(File file, String[] array) throws java.io.IOException {
-        String strFinal = String.join(Separator.VerticalBar.toString(), array);
+        String strFinal = String.join(Separator.Underscore.toString(), array);
 
         BufferedWriter wr = new BufferedWriter(new FileWriter(file, true));
         wr.write(strFinal);
@@ -29,7 +29,7 @@ public class TextFile {
         String line;
 
         while ((line = br.readLine()) != null) {
-            String[] separatedLine = line.split(Separator.VerticalBar.toString());
+            String[] separatedLine = line.split(Separator.Underscore.toString());
             finalList.add(separatedLine);
         }
         br.close();
