@@ -32,6 +32,22 @@ public class BookingImpl implements BookingPort {
     }
 
     @Override
+    public Booking getBooking(String[] strArray) {
+        return new Booking(
+                Integer.parseInt(strArray[0]),
+                Integer.parseInt(strArray[1]),
+                Integer.parseInt(strArray[2]),
+                LocalDateTime.parse(strArray[3], formatter),
+                LocalDateTime.parse(strArray[4], formatter),
+                LocalDateTime.parse(strArray[5], formatter),
+                Double.parseDouble(strArray[6]),
+                Boolean.parseBoolean(strArray[7]),
+                Boolean.parseBoolean(strArray[8]),
+                strArray[9]
+        );
+    }
+
+    @Override
     public ArrayList<String[]> getAllBooking() {
         return allBooking;
     }
@@ -40,18 +56,7 @@ public class BookingImpl implements BookingPort {
     public Booking getById(int id) {
         for (String[] i : allBooking) {
             if (Integer.parseInt(i[0]) == id) {
-                return new Booking(
-                        Integer.parseInt(i[0]),
-                        Integer.parseInt(i[1]),
-                        Integer.parseInt(i[2]),
-                        LocalDateTime.parse(i[3], formatter),
-                        LocalDateTime.parse(i[4], formatter),
-                        LocalDateTime.parse(i[5], formatter),
-                        Double.parseDouble(i[6]),
-                        Boolean.parseBoolean(i[7]),
-                        Boolean.parseBoolean(i[8]),
-                        i[9]
-                );
+                return getBooking(i);
             }
         }
         return null;

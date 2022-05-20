@@ -30,6 +30,18 @@ public class CustomerImpl implements CustomerPort {
     }
 
     @Override
+    public Customer getCustomer(String[] strArray) {
+        return new Customer(
+                Integer.parseInt(strArray[0]),
+                strArray[1],
+                strArray[2],
+                strArray[3],
+                strArray[4],
+                Integer.parseInt(strArray[5])
+        );
+    }
+
+    @Override
     public ArrayList<String[]> getAllCustomer() {
         return allCustomer;
     }
@@ -38,14 +50,7 @@ public class CustomerImpl implements CustomerPort {
     public Customer getById(int id) {
         for (String[] i : allCustomer) {
             if (Integer.parseInt(i[0]) == id) {
-                return new Customer(
-                        Integer.parseInt(i[0]),
-                        i[1],
-                        i[2],
-                        i[3],
-                        i[4],
-                        Integer.parseInt(i[5])
-                );
+                return getCustomer(i);
             }
         }
         return null;

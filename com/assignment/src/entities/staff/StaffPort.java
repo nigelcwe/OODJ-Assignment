@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public interface StaffPort {
     int generateId() throws IOException;
+    Staff getStaff(String[] strArray);
     ArrayList<String[]> getAllStaff() throws IOException;
     ArrayList<String[]> getByRole(Role role);
     Staff getById(int id);

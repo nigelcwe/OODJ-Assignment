@@ -30,6 +30,21 @@ public class StaffImpl implements StaffPort {
     }
 
     @Override
+    public Staff getStaff(String[] strArray) {
+        return new Staff(
+                Integer.parseInt(strArray[0]),
+                strArray[1],
+                strArray[2],
+                strArray[3],
+                strArray[4],
+                strArray[5],
+                strArray[6],
+                strArray[7],
+                Role.valueOf(strArray[8])
+        );
+    }
+
+    @Override
     public ArrayList<String[]> getAllStaff() {
         return allStaff;
     }
@@ -52,17 +67,7 @@ public class StaffImpl implements StaffPort {
     public Staff getById(int id) {
         for (String[] i : allStaff) {
             if (Integer.parseInt(i[0]) == id) {
-                return new Staff(
-                        Integer.parseInt(i[0]),
-                        i[1],
-                        i[2],
-                        i[3],
-                        i[4],
-                        i[5],
-                        i[6],
-                        i[7],
-                        Role.valueOf(i[8])
-                );
+                return getStaff(i);
             }
         }
         return null;

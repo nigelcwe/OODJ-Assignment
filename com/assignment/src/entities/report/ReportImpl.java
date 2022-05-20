@@ -64,7 +64,7 @@ public class ReportImpl implements ReportPort {
     public Report getById(int id) {
         for (String[] i : allReport) {
             if (Integer.parseInt(i[0]) == id) {
-                return this.getReport(i);
+                return getReport(i);
             }
         }
         return null;
@@ -175,15 +175,19 @@ public class ReportImpl implements ReportPort {
         float[] columnWidths = {45F, 160F, 45F, 90F, 90F, 90F};
         Table table = new Table(columnWidths).setHorizontalAlignment(HorizontalAlignment.CENTER);
 
-        table.addCell(new Paragraph("ID").setFont(courierBold).setFontSize(14))
-                .addCell(new Paragraph("Trainer Name").setFont(courierBold).setFontSize(14))
-                .addCell(new Paragraph("Sales").setFont(courierBold).setFontSize(14))
-                .addCell(new Paragraph("Revenue").setFont(courierBold).setFontSize(14))
-                .addCell(new Paragraph("Commission").setFont(courierBold).setFontSize(14))
-                .addCell(new Paragraph("Profit").setFont(courierBold).setFontSize(14));
+//        Adding Header Cells
+        table.addHeaderCell(new Paragraph("ID").setFont(courierBold).setFontSize(14))
+                .addHeaderCell(new Paragraph("Trainer Name").setFont(courierBold).setFontSize(14))
+                .addHeaderCell(new Paragraph("Sales").setFont(courierBold).setFontSize(14))
+                .addHeaderCell(new Paragraph("Revenue").setFont(courierBold).setFontSize(14))
+                .addHeaderCell(new Paragraph("Commission").setFont(courierBold).setFontSize(14))
+                .addHeaderCell(new Paragraph("Profit").setFont(courierBold).setFontSize(14));
 
+        double totalProfit = 0;
+
+//        Analysis Algorithm
         for (String[] i : allTrainer) {
-            Staff trainer = new Staff(Integer.parseInt(i[0]), i[1], i[2], i[3], i[4], i[5], i[6], i[7], Role.valueOf(i[8]));
+            Staff trainer = si.getStaff(i);
             int sales = 0;
             double revenue = 0, commission = 0, profit;
 
@@ -195,7 +199,9 @@ public class ReportImpl implements ReportPort {
                 }
             }
             profit = revenue - commission;
+            totalProfit = totalProfit + profit;
 
+//            Adding Content Cells
             table.addCell(new Paragraph(Integer.toString(trainer.id)).setFont(courier).setFontSize(12))
                     .addCell(new Paragraph(trainer.fullName).setFont(courier).setFontSize(12))
                     .addCell(new Paragraph(Integer.toString(sales)).setFont(courier).setFontSize(12))
@@ -203,6 +209,7 @@ public class ReportImpl implements ReportPort {
                     .addCell(new Paragraph(Double.toString(commission)).setFont(courier).setFontSize(12))
                     .addCell(new Paragraph(Double.toString(profit)).setFont(courier).setFontSize(12));
         }
+
 
         doc.add(table);
 
