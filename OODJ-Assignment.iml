@@ -7,34 +7,34 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="file://$MODULE_DIR$/External Jars/Bouncy Castle Jars" />
+          <root url="file://$MODULE_DIR$/com/assignment/src/External Jars/Bouncy Castle Jars" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
-        <jarDirectory url="file://$MODULE_DIR$/External Jars/Bouncy Castle Jars" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/com/assignment/src/External Jars/Bouncy Castle Jars" recursive="false" />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="file://$MODULE_DIR$/External Jars/iText 7.2.2 Jars" />
+          <root url="file://$MODULE_DIR$/com/assignment/src/External Jars/iText 7.2.2 Jars" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
-        <jarDirectory url="file://$MODULE_DIR$/External Jars/iText 7.2.2 Jars" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/com/assignment/src/External Jars/iText 7.2.2 Jars" recursive="false" />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="file://$MODULE_DIR$/External Jars/slf4j Jars" />
+          <root url="file://$MODULE_DIR$/com/assignment/src/External Jars/slf4j Jars" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
-        <jarDirectory url="file://$MODULE_DIR$/External Jars/slf4j Jars" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/com/assignment/src/External Jars/slf4j Jars" recursive="false" />
       </library>
     </orderEntry>
   </component>
