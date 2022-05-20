@@ -2,6 +2,19 @@ package com.assignment.src.entities.report;
 
 import com.assignment.src.entities.shared.FileSelection;
 import com.assignment.src.entities.shared.TextFile;
+import com.assignment.src.entities.staff.Role;
+import com.assignment.src.entities.staff.Staff;
+import com.assignment.src.entities.staff.StaffImpl;
+import com.itextpdf.io.font.constants.StandardFonts;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.properties.HorizontalAlignment;
+
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -32,6 +45,17 @@ public class ReportImpl implements ReportPort {
     }
 
     @Override
+    public Report getReport(String[] strArray) {
+        return new Report(
+                Integer.parseInt(strArray[0]),
+                Integer.parseInt(strArray[1]),
+                Integer.parseInt(strArray[2]),
+                Double.parseDouble(strArray[3]),
+                LocalDateTime.parse(strArray[5], formatter)
+        );
+    }
+
+    @Override
     public ArrayList<String[]> getAllReport() {
         return allReport;
     }
@@ -40,14 +64,7 @@ public class ReportImpl implements ReportPort {
     public Report getById(int id) {
         for (String[] i : allReport) {
             if (Integer.parseInt(i[0]) == id) {
-                return new Report(
-                        Integer.parseInt(i[0]),
-                        Integer.parseInt(i[1]),
-                        Integer.parseInt(i[2]),
-                        Double.parseDouble(i[3]),
-                        Double.parseDouble(i[4]),
-                        LocalDateTime.parse(i[5], formatter)
-                );
+                return this.getReport(i);
             }
         }
         return null;
@@ -82,53 +99,11 @@ public class ReportImpl implements ReportPort {
     }
 
     @Override
-    public ArrayList<String[]> getByManagerId(int id) {
-        ArrayList<String[]> finalArrayList = new ArrayList<>();
-
-        for (String[] i : allReport) {
-            if (Integer.parseInt(i[3]) == id) {
-                finalArrayList.add(i);
-            }
-        }
-
-        if (finalArrayList.size() > 0) {return finalArrayList;}
-        else {return null;}
-    }
-
-    @Override
-    public ArrayList<String[]> getPaid() {
-        ArrayList<String[]> finalArrayList = new ArrayList<>();
-
-        for (String[] i : allReport) {
-            if (Boolean.parseBoolean(i[5])) {
-                finalArrayList.add(i);
-            }
-        }
-
-        if (finalArrayList.size() > 0) {return finalArrayList;}
-        else {return null;}
-    }
-
-    @Override
-    public ArrayList<String[]> getUnpaid() {
-        ArrayList<String[]> finalArrayList = new ArrayList<>();
-
-        for (String[] i : allReport) {
-            if (!Boolean.parseBoolean(i[5])) {
-                finalArrayList.add(i);
-            }
-        }
-
-        if (finalArrayList.size() > 0) {return finalArrayList;}
-        else {return null;}
-    }
-
-    @Override
     public ArrayList<String[]> getByMonth(LocalDateTime date) {
         ArrayList<String[]> finalArrayList = new ArrayList<>();
 
         for (String[] i : allReport) {
-            if (LocalDateTime.parse(i[6], formatter).getMonth().compareTo(date.getMonth()) == 0) {
+            if (LocalDateTime.parse(i[5], formatter).getMonth().compareTo(date.getMonth()) == 0) {
                 finalArrayList.add(i);
             }
         }
@@ -179,5 +154,58 @@ public class ReportImpl implements ReportPort {
         };
         tf.append(file, newReport);
         return 0;
+    }
+
+    @Override
+    public void generateReport(LocalDateTime date) throws IOException {
+        StaffImpl si = new StaffImpl();
+        ArrayList<String[]> reportByMonth = this.getByMonth(date);
+        ArrayList<String[]> allTrainer = si.getByRole(Role.Trainer);
+
+        PdfWriter writer = new PdfWriter(FileSelection.MonthlyReport.toString());
+        PdfDocument pdf = new PdfDocument(writer);
+        Document doc = new Document(pdf);
+
+        PdfFont courierBold = PdfFontFactory.createFont(StandardFonts.COURIER_BOLD);
+        PdfFont courier = PdfFontFactory.createFont(StandardFonts.COURIER);
+
+        Paragraph title = new Paragraph("Monthly Report").setFontSize(20).setFont(courierBold);
+        doc.add(title);
+
+        float[] columnWidths = {45F, 160F, 45F, 90F, 90F, 90F};
+        Table table = new Table(columnWidths).setHorizontalAlignment(HorizontalAlignment.CENTER);
+
+        table.addCell(new Paragraph("ID").setFont(courierBold).setFontSize(14))
+                .addCell(new Paragraph("Trainer Name").setFont(courierBold).setFontSize(14))
+                .addCell(new Paragraph("Sales").setFont(courierBold).setFontSize(14))
+                .addCell(new Paragraph("Revenue").setFont(courierBold).setFontSize(14))
+                .addCell(new Paragraph("Commission").setFont(courierBold).setFontSize(14))
+                .addCell(new Paragraph("Profit").setFont(courierBold).setFontSize(14));
+
+        for (String[] i : allTrainer) {
+            Staff trainer = new Staff(Integer.parseInt(i[0]), i[1], i[2], i[3], i[4], i[5], i[6], i[7], Role.valueOf(i[8]));
+            int sales = 0;
+            double revenue = 0, commission = 0, profit;
+
+            for (String[] j : reportByMonth) {
+                if (i[0].equals(j[2])) {
+                    sales = sales + 1;
+                    revenue = revenue + Double.parseDouble(j[3]);
+                    commission = commission + Double.parseDouble(j[4]);
+                }
+            }
+            profit = revenue - commission;
+
+            table.addCell(new Paragraph(Integer.toString(trainer.id)).setFont(courier).setFontSize(12))
+                    .addCell(new Paragraph(trainer.fullName).setFont(courier).setFontSize(12))
+                    .addCell(new Paragraph(Integer.toString(sales)).setFont(courier).setFontSize(12))
+                    .addCell(new Paragraph(Double.toString(revenue)).setFont(courier).setFontSize(12))
+                    .addCell(new Paragraph(Double.toString(commission)).setFont(courier).setFontSize(12))
+                    .addCell(new Paragraph(Double.toString(profit)).setFont(courier).setFontSize(12));
+        }
+
+        doc.add(table);
+
+        doc.close();
     }
 }
