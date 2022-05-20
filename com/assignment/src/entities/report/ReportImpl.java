@@ -212,6 +212,8 @@ public class ReportImpl implements ReportPort {
                     .addCell(new Paragraph(Double.toString(profit)).setFont(courier).setFontSize(12).setTextAlignment(TextAlignment.RIGHT));
         }
 
+
+//        Adding Footer Cells
         Cell cell = new Cell(1, 5).add(new Paragraph("Total Paid:")).setFont(courierBold).setFontSize(14).setTextAlignment(TextAlignment.CENTER);
         table.addFooterCell(cell).addFooterCell(new Paragraph(Double.toString(totalProfit)).setFont(courierBold).setFontSize(14).setTextAlignment(TextAlignment.RIGHT));
 
