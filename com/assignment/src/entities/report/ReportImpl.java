@@ -44,13 +44,9 @@ public class ReportImpl implements ReportPort {
                         Integer.parseInt(i[0]),
                         Integer.parseInt(i[1]),
                         Integer.parseInt(i[2]),
-                        Integer.parseInt(i[3]),
+                        Double.parseDouble(i[3]),
                         Double.parseDouble(i[4]),
-                        Boolean.parseBoolean(i[5]),
-                        LocalDateTime.parse(i[6], formatter),
-                        LocalDateTime.parse(i[7], formatter),
-                        LocalDateTime.parse(i[8], formatter),
-                        LocalDateTime.parse(i[9], formatter)
+                        LocalDateTime.parse(i[5], formatter)
                 );
             }
         }
@@ -152,13 +148,9 @@ public class ReportImpl implements ReportPort {
                 i[0] = Integer.toString(report.id);
                 i[1] = Integer.toString(report.customerId);
                 i[2] = Integer.toString(report.trainerId);
-                i[3] = Integer.toString(report.managerId);
-                i[4] = Double.toString(report.paymentAmount);
-                i[5] = Boolean.toString(report.isPaid);
-                i[6] = report.creationDate.format(formatter);
-                i[7] = report.paymentDate.format(formatter);
-                i[8] = report.startTime.format(formatter);
-                i[9] = report.endTime.format(formatter);
+                i[3] = Double.toString(report.paymentAmount);
+                i[4] = Double.toString(report.commission);
+                i[5] = report.creationDate.format(formatter);
                 break;
             }
         }
@@ -181,13 +173,9 @@ public class ReportImpl implements ReportPort {
                 Integer.toString(report.id),
                 Integer.toString(report.customerId),
                 Integer.toString(report.trainerId),
-                Integer.toString(report.managerId),
                 Double.toString(report.paymentAmount),
-                Boolean.toString(report.isPaid),
+                Double.toString(report.commission),
                 report.creationDate.format(formatter),
-                report.paymentDate.format(formatter),
-                report.startTime.format(formatter),
-                report.endTime.format(formatter)
         };
         tf.append(file, newReport);
         return 0;
