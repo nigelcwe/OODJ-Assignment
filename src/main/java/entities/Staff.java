@@ -1,7 +1,7 @@
 package entities;
 
-import entities.shared.Human;
 import enums.Role;
+import entities.shared.Human;
 
 public class Staff extends Human {
     public String username, password, icNum;

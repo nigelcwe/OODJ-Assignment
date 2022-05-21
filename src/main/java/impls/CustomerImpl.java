@@ -1,8 +1,8 @@
 package impls;
 
 import entities.Customer;
-import enums.FileSelection;
 import entities.shared.TextFile;
+import enums.FileSelection;
 import ports.CustomerPort;
 
 import java.io.File;
