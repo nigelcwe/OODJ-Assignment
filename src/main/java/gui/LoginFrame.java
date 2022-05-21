@@ -7,7 +7,6 @@ package gui;
 import entities.Staff;
 import entities.shared.GymSystem;
 import enums.Role;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,6 +21,7 @@ public class LoginFrame extends javax.swing.JFrame {
      */
     public LoginFrame() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -33,32 +33,77 @@ public class LoginFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jInternalFrame1 = new javax.swing.JInternalFrame();
-        jLabel1 = new javax.swing.JLabel();
-        loginNametxt = new javax.swing.JTextField();
+        loginFailDial = new javax.swing.JDialog();
+        loginFailPanel = new javax.swing.JPanel();
+        loginFailLbl = new javax.swing.JLabel();
+        loginFailBtn = new javax.swing.JButton();
+        loginNameTxt = new javax.swing.JTextField();
         loginPasstxt = new javax.swing.JPasswordField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        loginNameLbl = new javax.swing.JLabel();
+        loginPassLbl = new javax.swing.JLabel();
         loginLoginbtn = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
+        loginTitleLbl = new javax.swing.JLabel();
+
+        loginFailDial.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        loginFailDial.setTitle("Error");
+        loginFailDial.setAlwaysOnTop(true);
+        loginFailDial.setAutoRequestFocus(false);
+        loginFailDial.setBounds(new java.awt.Rectangle(0, 0, 0, 0));
+        loginFailDial.setModal(true);
+        loginFailDial.setPreferredSize(new java.awt.Dimension(250, 180));
+        loginFailDial.setResizable(false);
+        loginFailDial.setSize(new java.awt.Dimension(250, 180));
+        loginFailDial.setLocationRelativeTo(null);
+
+        loginFailLbl.setText("Incorrect username or password !");
+
+        loginFailBtn.setText("Back");
+        loginFailBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginFailBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout loginFailPanelLayout = new javax.swing.GroupLayout(loginFailPanel);
+        loginFailPanel.setLayout(loginFailPanelLayout);
+        loginFailPanelLayout.setHorizontalGroup(
+            loginFailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(loginFailPanelLayout.createSequentialGroup()
+                .addContainerGap(25, Short.MAX_VALUE)
+                .addGroup(loginFailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginFailPanelLayout.createSequentialGroup()
+                        .addComponent(loginFailLbl)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginFailPanelLayout.createSequentialGroup()
+                        .addComponent(loginFailBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(56, 56, 56))))
+        );
+        loginFailPanelLayout.setVerticalGroup(
+            loginFailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(loginFailPanelLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(loginFailLbl)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(loginFailBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        javax.swing.GroupLayout loginFailDialLayout = new javax.swing.GroupLayout(loginFailDial.getContentPane());
+        loginFailDial.getContentPane().setLayout(loginFailDialLayout);
+        loginFailDialLayout.setHorizontalGroup(
+            loginFailDialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(loginFailPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        loginFailDialLayout.setVerticalGroup(
+            loginFailDialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(loginFailPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("AGC Management System");
 
-        jInternalFrame1.setBackground(new java.awt.Color(255, 255, 255));
-        jInternalFrame1.setClosable(true);
-        jInternalFrame1.setIconifiable(true);
-        jInternalFrame1.setMaximizable(true);
-        jInternalFrame1.setResizable(true);
-        jInternalFrame1.setTitle("Gym Centre Management System");
-        jInternalFrame1.setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/cd62f3f748e1eefa43297ddb2f0e43563f3ce3de0002dcdc13d146122f46eaec.jpg"))); // NOI18N
-        jInternalFrame1.setName(""); // NOI18N
-        jInternalFrame1.setVisible(true);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Johan\\Desktop\\Software Engineering\\Year 2 - SEM 1\\Object oriented development with Java\\Assignment\\OODJ_Johan_Branch\\src\\main\\java\\gui\\cd62f3f748e1eefa43297ddb2f0e43563f3ce3de0002dcdc13d146122f46eaec.jpg")); // NOI18N
-
-        loginNametxt.addActionListener(new java.awt.event.ActionListener() {
+        loginNameTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginNametxtActionPerformed(evt);
+                loginNameTxtActionPerformed(evt);
             }
         });
 
@@ -68,9 +113,9 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Username :");
+        loginNameLbl.setText("Username :");
 
-        jLabel3.setText("Password :");
+        loginPassLbl.setText("Password :");
 
         loginLoginbtn.setText("Login");
         loginLoginbtn.setName(""); // NOI18N
@@ -80,98 +125,85 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        jLabel4.setText("AGC MANAGEMENT SIGN-IN");
-
-        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
-        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
-        jInternalFrame1Layout.setHorizontalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(131, 131, 131))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(74, 74, 74))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
-                .addContainerGap(83, Short.MAX_VALUE)
-                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(loginPasstxt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                        .addComponent(loginLoginbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(16, 16, 16))
-                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(loginNametxt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(112, 112, 112))
-        );
-        jInternalFrame1Layout.setVerticalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addGap(31, 31, 31)
-                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(loginNametxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(loginPasstxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
-                .addComponent(loginLoginbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
-        );
-
-        jLabel1.getAccessibleContext().setAccessibleName("loginLogolbl");
-        loginNametxt.getAccessibleContext().setAccessibleName("loginNametxt");
-        loginPasstxt.getAccessibleContext().setAccessibleName("loginPasstxt");
-        jLabel2.getAccessibleContext().setAccessibleName("loginNamelbl");
-        jLabel3.getAccessibleContext().setAccessibleName("loginPasslbl");
-        loginLoginbtn.getAccessibleContext().setAccessibleName("loginLoginbtn");
-        jLabel4.getAccessibleContext().setAccessibleName("loginTitlelbl");
+        loginTitleLbl.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        loginTitleLbl.setText("GYM MANAGEMENT CENTRE SIGN-IN");
+        loginTitleLbl.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(43, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(loginTitleLbl)
+                        .addGap(35, 35, 35))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(loginLoginbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(123, 123, 123))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(84, 84, 84)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(loginPassLbl)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(loginPasstxt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(loginNameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(loginNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(loginTitleLbl)
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(loginNameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(loginNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(loginPassLbl)
+                    .addComponent(loginPasstxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(loginLoginbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jInternalFrame1.getAccessibleContext().setAccessibleName("loginForm");
+        loginNameTxt.getAccessibleContext().setAccessibleName("loginNametxt");
+        loginPasstxt.getAccessibleContext().setAccessibleName("loginPasstxt");
+        loginNameLbl.getAccessibleContext().setAccessibleName("loginNamelbl");
+        loginPassLbl.getAccessibleContext().setAccessibleName("loginPasslbl");
+        loginLoginbtn.getAccessibleContext().setAccessibleName("loginLoginbtn");
+        loginTitleLbl.getAccessibleContext().setAccessibleName("");
 
         getAccessibleContext().setAccessibleName("loginFrame");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void loginFailBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginFailBtnActionPerformed
+        loginFailDial.setVisible(false);
+    }//GEN-LAST:event_loginFailBtnActionPerformed
+
     private void loginLoginbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginLoginbtnActionPerformed
         try {
-            String username = loginNametxt.getText();
+            String username = loginNameTxt.getText();
             String password = String.valueOf(loginPasstxt.getPassword());
             GymSystem gym = new GymSystem();
             Staff staff = gym.staff.login(username, password);
-            
+
             if (staff == null) {
-                System.out.println("Please enter valid username and password");
-                
-            } else if (staff.role == Role.Manager) {
-                 this.setVisible(false);
-                 new ManagerMainFrame().setVisible(true);
-                 
-            } else if (staff.role == Role.Trainer) { 
+                loginFailDial.setVisible(true);
+
+            } else if (staff.role.equals(Role.Manager)) {
+                this.setVisible(false);
+                new ManagerMainFrame().setVisible(true);
+
+            } else if (staff.role.equals(Role.Trainer)) {
                 this.setVisible(false);
                 new TrainerMainFrame().setVisible(true);
             }
@@ -180,18 +212,23 @@ public class LoginFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_loginLoginbtnActionPerformed
 
-    private void loginNametxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginNametxtActionPerformed
-
-    }//GEN-LAST:event_loginNametxtActionPerformed
-
     private void loginPasstxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginPasstxtActionPerformed
 
     }//GEN-LAST:event_loginPasstxtActionPerformed
+
+    private void loginNameTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginNameTxtActionPerformed
+
+    }//GEN-LAST:event_loginNameTxtActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -219,13 +256,15 @@ public class LoginFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JInternalFrame jInternalFrame1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton loginFailBtn;
+    private javax.swing.JDialog loginFailDial;
+    private javax.swing.JLabel loginFailLbl;
+    private javax.swing.JPanel loginFailPanel;
     private javax.swing.JButton loginLoginbtn;
-    private javax.swing.JTextField loginNametxt;
+    private javax.swing.JLabel loginNameLbl;
+    private javax.swing.JTextField loginNameTxt;
+    private javax.swing.JLabel loginPassLbl;
     private javax.swing.JPasswordField loginPasstxt;
+    private javax.swing.JLabel loginTitleLbl;
     // End of variables declaration//GEN-END:variables
 }
