@@ -5,8 +5,6 @@ import com.assignment.src.entities.customer.CustomerImpl;
 import com.assignment.src.entities.report.ReportImpl;
 import com.assignment.src.entities.staff.StaffImpl;
 
-import java.io.IOException;
-
 public class GymSystem {
     public final StaffImpl staff = new StaffImpl();
     public final BookingImpl booking = new BookingImpl();
