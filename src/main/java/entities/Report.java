@@ -1,4 +1,4 @@
-package entities.report;
+package entities;
 
 import entities.shared.Entity;
 import java.time.LocalDateTime;

@@ -1,4 +1,4 @@
-package entities.shared;
+package enums;
 
 public enum FileSelection {
     Booking("C:\\Users\\chanw\\repos\\OODJ-Assignment\\src\\main\\java\\data\\Booking.txt"),

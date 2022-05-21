@@ -1,4 +1,4 @@
-package entities.booking;
+package entities;
 
 import entities.shared.Entity;
 

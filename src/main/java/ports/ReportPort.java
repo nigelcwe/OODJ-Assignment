@@ -1,4 +1,6 @@
-package entities.report;
+package ports;
+
+import entities.Report;
 
 import java.io.IOException;
 import java.time.LocalDateTime;

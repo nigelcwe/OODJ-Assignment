@@ -1,4 +1,4 @@
-package entities.shared;
+package enums;
 
 public enum Separator {
     Underscore("_");

@@ -1,4 +1,4 @@
-package entities.customer;
+package entities;
 
 import entities.shared.Human;
 

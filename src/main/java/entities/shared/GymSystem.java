@@ -1,9 +1,9 @@
 package entities.shared;
 
-import entities.booking.BookingImpl;
-import entities.customer.CustomerImpl;
-import entities.report.ReportImpl;
-import entities.staff.StaffImpl;
+import impls.BookingImpl;
+import impls.CustomerImpl;
+import impls.ReportImpl;
+import impls.StaffImpl;
 
 public class GymSystem {
     public final StaffImpl staff = new StaffImpl();

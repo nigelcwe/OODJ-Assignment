@@ -1,6 +1,7 @@
-package entities.report;
+package impls;
 
-import entities.shared.FileSelection;
+import entities.Report;
+import enums.FileSelection;
 import entities.shared.TextFile;
 import com.itextpdf.io.font.constants.StandardFonts;
 import com.itextpdf.kernel.font.PdfFont;
@@ -13,9 +14,9 @@ import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.properties.HorizontalAlignment;
 import com.itextpdf.layout.properties.TextAlignment;
-import entities.staff.Role;
-import entities.staff.Staff;
-import entities.staff.StaffImpl;
+import enums.Role;
+import entities.Staff;
+import ports.ReportPort;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,7 +1,9 @@
-package entities.customer;
+package impls;
 
-import entities.shared.FileSelection;
+import entities.Customer;
+import enums.FileSelection;
 import entities.shared.TextFile;
+import ports.CustomerPort;
 
 import java.io.File;
 import java.io.IOException;

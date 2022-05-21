@@ -1,4 +1,6 @@
-package entities.customer;
+package ports;
+
+import entities.Customer;
 
 import java.io.IOException;
 import java.util.ArrayList;

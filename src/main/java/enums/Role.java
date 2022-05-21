@@ -1,4 +1,4 @@
-package entities.staff;
+package enums;
 
 public enum Role {
     Manager,

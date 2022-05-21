@@ -1,5 +1,7 @@
 package entities.shared;
 
+import enums.Separator;
+
 import java.io.*;
 import java.util.ArrayList;
 

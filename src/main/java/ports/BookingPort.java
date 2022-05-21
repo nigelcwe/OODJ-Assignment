@@ -1,4 +1,6 @@
-package entities.booking;
+package ports;
+
+import entities.Booking;
 
 import java.io.IOException;
 import java.util.ArrayList;
