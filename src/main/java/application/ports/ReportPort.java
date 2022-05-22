@@ -13,7 +13,7 @@ public interface ReportPort {
     Report getById(int id);
     ArrayList<String[]> getByCustomerId(int id);
     ArrayList<String[]> getByTrainerId(int id);
-    ArrayList<String[]> getByMonth(LocalDateTime date);
+    ArrayList<String[]> getByMonthAndYear(LocalDateTime date);
     int modifyReport(Report report) throws IOException;
     int createReport(Report report) throws IOException;
     int generateReport(LocalDateTime date) throws IOException;

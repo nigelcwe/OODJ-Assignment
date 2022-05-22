@@ -102,10 +102,11 @@ public class ReportImpl implements ReportPort {
     }
 
     @Override
-    public ArrayList<String[]> getByMonth(LocalDateTime date) {
+    public ArrayList<String[]> getByMonthAndYear(LocalDateTime date) {
         ArrayList<String[]> finalArrayList = new ArrayList<>();
 
         for (String[] i : allReport) {
+            if (LocalDateTime.parse(i[5], formatter).getYear() != date.getYear()) continue;
             if (LocalDateTime.parse(i[5], formatter).getMonth().compareTo(date.getMonth()) == 0) {
                 finalArrayList.add(i);
             }
@@ -162,7 +163,7 @@ public class ReportImpl implements ReportPort {
     @Override
     public int generateReport(LocalDateTime date) throws IOException {
         StaffImpl si = new StaffImpl();
-        ArrayList<String[]> reportByMonth = this.getByMonth(date);
+        ArrayList<String[]> reportByMonth = this.getByMonthAndYear(date);
         ArrayList<String[]> allTrainer = si.getByRole(Role.Trainer);
 
         PdfWriter writer = new PdfWriter(FileSelection.MonthlyReport.toString());
