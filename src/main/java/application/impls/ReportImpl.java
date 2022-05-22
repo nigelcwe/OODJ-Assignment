@@ -122,13 +122,13 @@ public class ReportImpl implements ReportPort {
         updateAllReport();
 
         for (String[] i : allReport) {
-            if (Integer.parseInt(i[0]) == report.id) {
-                i[0] = Integer.toString(report.id);
-                i[1] = Integer.toString(report.customerId);
-                i[2] = Integer.toString(report.trainerId);
-                i[3] = Double.toString(report.paymentAmount);
-                i[4] = Double.toString(report.commission);
-                i[5] = report.creationDate.format(formatter);
+            if (Integer.parseInt(i[0]) == report.getId()) {
+                i[0] = Integer.toString(report.getId());
+                i[1] = Integer.toString(report.getCustomerId());
+                i[2] = Integer.toString(report.getTrainerId());
+                i[3] = Double.toString(report.getPaymentAmount());
+                i[4] = Double.toString(report.getCommission());
+                i[5] = report.getCreationDate().format(formatter);
                 break;
             }
         }
@@ -148,12 +148,12 @@ public class ReportImpl implements ReportPort {
     @Override
     public int createReport(Report report) throws IOException {
         String[] newReport = {
-                Integer.toString(report.id),
-                Integer.toString(report.customerId),
-                Integer.toString(report.trainerId),
-                Double.toString(report.paymentAmount),
-                Double.toString(report.commission),
-                report.creationDate.format(formatter),
+                Integer.toString(report.getId()),
+                Integer.toString(report.getCustomerId()),
+                Integer.toString(report.getTrainerId()),
+                Double.toString(report.getPaymentAmount()),
+                Double.toString(report.getCommission()),
+                report.getCreationDate().format(formatter),
         };
         tf.append(file, newReport);
         return 0;
@@ -205,8 +205,8 @@ public class ReportImpl implements ReportPort {
             totalProfit = totalProfit + profit;
 
 //            Adding Content Cells
-            table.addCell(new Paragraph(Integer.toString(trainer.id)).setFont(courier).setFontSize(12).setTextAlignment(TextAlignment.RIGHT))
-                    .addCell(new Paragraph(trainer.fullName).setFont(courier).setFontSize(12).setTextAlignment(TextAlignment.LEFT))
+            table.addCell(new Paragraph(Integer.toString(trainer.getId())).setFont(courier).setFontSize(12).setTextAlignment(TextAlignment.RIGHT))
+                    .addCell(new Paragraph(trainer.getFullName()).setFont(courier).setFontSize(12).setTextAlignment(TextAlignment.LEFT))
                     .addCell(new Paragraph(Integer.toString(sales)).setFont(courier).setFontSize(12).setTextAlignment(TextAlignment.RIGHT))
                     .addCell(new Paragraph(Double.toString(revenue)).setFont(courier).setFontSize(12).setTextAlignment(TextAlignment.RIGHT))
                     .addCell(new Paragraph(Double.toString(commission)).setFont(courier).setFontSize(12).setTextAlignment(TextAlignment.RIGHT))

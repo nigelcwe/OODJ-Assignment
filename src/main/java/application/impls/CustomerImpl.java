@@ -65,13 +65,13 @@ public class CustomerImpl implements CustomerPort {
         updateAllCustomer();
 
         for (String[] i : allCustomer) {
-            if (Integer.parseInt(i[0]) == customer.id) {
-                i[0] = Integer.toString(customer.id);
-                i[1] = customer.firstName;
-                i[2] = customer.lastName;
-                i[3] = customer.phoneNum;
-                i[4] = customer.email;
-                i[5] = Integer.toString(customer.bookingId);
+            if (Integer.parseInt(i[0]) == customer.getId()) {
+                i[0] = Integer.toString(customer.getId());
+                i[1] = customer.getFirstName();
+                i[2] = customer.getLastName();
+                i[3] = customer.getPhoneNum();
+                i[4] = customer.getEmail();
+                i[5] = Integer.toString(customer.getBookingId());
                 break;
             }
         }
@@ -91,12 +91,12 @@ public class CustomerImpl implements CustomerPort {
     @Override
     public int createCustomer(Customer customer) throws IOException {
         String[] newCustomer = {
-                Integer.toString(customer.id),
-                customer.firstName,
-                customer.lastName,
-                customer.phoneNum,
-                customer.email,
-                Integer.toString(customer.bookingId)
+                Integer.toString(customer.getId()),
+                customer.getFirstName(),
+                customer.getLastName(),
+                customer.getPhoneNum(),
+                customer.getEmail(),
+                Integer.toString(customer.getBookingId())
         };
         tf.append(file, newCustomer);
         return 0;

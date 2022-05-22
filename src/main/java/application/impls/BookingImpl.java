@@ -156,17 +156,17 @@ public class BookingImpl implements BookingPort {
         updateAllBooking();
 
         for (String[] i : allBooking) {
-            if (Integer.parseInt(i[0]) == booking.id) {
-                i[0] = Integer.toString(booking.id);
-                i[1] = Integer.toString(booking.customerId);
-                i[2] = Integer.toString(booking.trainerId);
-                i[3] = booking.creationDate.format(formatter);
-                i[4] = booking.startTime.format(formatter);
-                i[5] = booking.endTime.format(formatter);
-                i[6] = Double.toString(booking.price);
-                i[7] = Boolean.toString(booking.isCompleted);
-                i[8] = Boolean.toString(booking.isPaid);
-                i[9] = booking.feedback;
+            if (Integer.parseInt(i[0]) == booking.getId()) {
+                i[0] = Integer.toString(booking.getId());
+                i[1] = Integer.toString(booking.getCustomerId());
+                i[2] = Integer.toString(booking.getTrainerId());
+                i[3] = booking.getCreationDate().format(formatter);
+                i[4] = booking.getStartTime().format(formatter);
+                i[5] = booking.getEndTime().format(formatter);
+                i[6] = Double.toString(booking.getPrice());
+                i[7] = Boolean.toString(booking.isCompleted());
+                i[8] = Boolean.toString(booking.isPaid());
+                i[9] = booking.getFeedback();
                 break;
             }
         }
@@ -191,7 +191,7 @@ public class BookingImpl implements BookingPort {
 
         for (int i = 0; i < allBooking.size(); i++) {
             String[] j = allBooking.get(i);
-            if (Integer.parseInt(j[0]) == booking.id) {
+            if (Integer.parseInt(j[0]) == booking.getId()) {
                 allBooking.remove(i);
                 break;
             }
@@ -205,16 +205,16 @@ public class BookingImpl implements BookingPort {
     @Override
     public int createBooking(Booking booking) throws IOException {
         String[] newBooking = {
-                Integer.toString(booking.id),
-                Integer.toString(booking.customerId),
-                Integer.toString(booking.trainerId),
-                booking.creationDate.format(formatter),
-                booking.startTime.format(formatter),
-                booking.endTime.format(formatter),
-                Double.toString(booking.price),
-                Boolean.toString(booking.isCompleted),
-                Boolean.toString(booking.isPaid),
-                booking.feedback
+                Integer.toString(booking.getId()),
+                Integer.toString(booking.getCustomerId()),
+                Integer.toString(booking.getTrainerId()),
+                booking.getCreationDate().format(formatter),
+                booking.getStartTime().format(formatter),
+                booking.getEndTime().format(formatter),
+                Double.toString(booking.getPrice()),
+                Boolean.toString(booking.isCompleted()),
+                Boolean.toString(booking.isPaid()),
+                booking.getFeedback()
         };
         tf.append(file, newBooking);
         return 0;

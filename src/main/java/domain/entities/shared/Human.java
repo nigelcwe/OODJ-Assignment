@@ -1,7 +1,7 @@
 package domain.entities.shared;
 
 public abstract class Human extends Entity {
-    public String firstName, lastName, fullName, phoneNum, email;
+    protected String firstName, lastName, fullName, phoneNum, email;
 
     public Human(int id, String firstName, String lastName, String phoneNum, String email) {
         super(id);

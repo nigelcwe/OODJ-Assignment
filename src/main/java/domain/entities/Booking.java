@@ -5,11 +5,11 @@ import domain.entities.shared.Entity;
 import java.time.LocalDateTime;
 
 public class Booking extends Entity {
-    public int customerId, trainerId;
-    public LocalDateTime creationDate, startTime, endTime;
-    public double price;
-    public boolean isCompleted, isPaid;
-    public String feedback;
+    protected int customerId, trainerId;
+    protected LocalDateTime creationDate, startTime, endTime;
+    protected double price;
+    protected boolean isCompleted, isPaid;
+    protected String feedback;
 
     public Booking(int id, int customerId, int trainerId, LocalDateTime creationDate, LocalDateTime startTime, LocalDateTime endTime, double price, boolean isCompleted, boolean isPaid, String feedback) {
         super(id);

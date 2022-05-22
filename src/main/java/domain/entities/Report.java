@@ -4,9 +4,9 @@ import domain.entities.shared.Entity;
 import java.time.LocalDateTime;
 
 public class Report extends Entity {
-    public int customerId, trainerId;
-    public double paymentAmount, commission;
-    public LocalDateTime creationDate;
+    protected int customerId, trainerId;
+    protected double paymentAmount, commission;
+    protected LocalDateTime creationDate;
 
     public Report(int id, int customerId, int trainerId, double paymentAmount, LocalDateTime creationDate) {
         super(id);
@@ -43,10 +43,6 @@ public class Report extends Entity {
 
     public double getCommission() {
         return commission;
-    }
-
-    public void setCommission(double commission) {
-        this.commission = commission;
     }
 
     public LocalDateTime getCreationDate() {

@@ -6,10 +6,10 @@ import application.impls.BookingImpl;
 import application.impls.CustomerImpl;
 
 public class GymSystem {
-    public final StaffImpl staff = new StaffImpl();
-    public final BookingImpl booking = new BookingImpl();
-    public final CustomerImpl customer = new CustomerImpl();
-    public final ReportImpl report = new ReportImpl();
+    protected final StaffImpl staff = new StaffImpl();
+    protected final BookingImpl booking = new BookingImpl();
+    protected final CustomerImpl customer = new CustomerImpl();
+    protected final ReportImpl report = new ReportImpl();
 
     public GymSystem() throws Exception {
     }

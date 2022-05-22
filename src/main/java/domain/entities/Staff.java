@@ -4,8 +4,8 @@ import domain.enums.Role;
 import domain.entities.shared.Human;
 
 public class Staff extends Human {
-    public String username, password, icNum;
-    public Role role;
+    protected String username, password, icNum;
+    protected Role role;
 
     public Staff(int id, String firstName, String lastName, String phoneNum, String email, String username, String password, String icNum, Role role) {
         super(id, firstName, lastName, phoneNum, email);

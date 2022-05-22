@@ -194,16 +194,16 @@ public class LoginFrame extends javax.swing.JFrame {
             String username = loginNameTxt.getText();
             String password = String.valueOf(loginPasstxt.getPassword());
             GymSystem gym = new GymSystem();
-            Staff staff = gym.staff.login(username, password);
+            Staff staff = gym.getStaff().login(username, password);
 
             if (staff == null) {
                 loginFailDial.setVisible(true);
 
-            } else if (staff.role.equals(Role.Manager)) {
+            } else if (staff.getRole().equals(Role.Manager)) {
                 this.setVisible(false);
                 new ManagerMainFrame().setVisible(true);
 
-            } else if (staff.role.equals(Role.Trainer)) {
+            } else if (staff.getRole().equals(Role.Trainer)) {
                 this.setVisible(false);
                 new TrainerMainFrame().setVisible(true);
             }

@@ -103,16 +103,16 @@ public class StaffImpl implements StaffPort {
         updateAllStaff();
 
         for (String[] i : allStaff) {
-            if (Integer.parseInt(i[0]) == staff.id) {
-                i[0] = String.valueOf(staff.id);
-                i[1] = staff.firstName;
-                i[2] = staff.lastName;
-                i[3] = staff.phoneNum;
-                i[4] = staff.email;
-                i[5] = staff.username;
-                i[6] = staff.password;
-                i[7] = staff.icNum;
-                i[8] = staff.role.toString();
+            if (Integer.parseInt(i[0]) == staff.getId()) {
+                i[0] = String.valueOf(staff.getId());
+                i[1] = staff.getFirstName();
+                i[2] = staff.getLastName();
+                i[3] = staff.getPhoneNum();
+                i[4] = staff.getEmail();
+                i[5] = staff.getUsername();
+                i[6] = staff.getPassword();
+                i[7] = staff.getIcNum();
+                i[8] = staff.getRole().toString();
                 break;
             }
         }
@@ -137,7 +137,7 @@ public class StaffImpl implements StaffPort {
 
         for (int i = 0; i < allStaff.size(); i++) {
             String[] j = allStaff.get(i);
-            if (Integer.parseInt(j[0]) == staff.id) {
+            if (Integer.parseInt(j[0]) == staff.getId()) {
                 allStaff.remove(i);
                 break;
             }
@@ -153,15 +153,15 @@ public class StaffImpl implements StaffPort {
     @Override
     public int createStaff(Staff staff) throws IOException {
         String[] newStaff = {
-                Integer.toString(staff.id),
-                staff.firstName,
-                staff.lastName,
-                staff.phoneNum,
-                staff.email,
-                staff.username,
-                staff.password,
-                staff.icNum,
-                staff.role.toString()
+                Integer.toString(staff.getId()),
+                staff.getFirstName(),
+                staff.getLastName(),
+                staff.getPhoneNum(),
+                staff.getEmail(),
+                staff.getUsername(),
+                staff.getPassword(),
+                staff.getIcNum(),
+                staff.getRole().toString()
         };
         tf.append(file, newStaff);
         return 0;
