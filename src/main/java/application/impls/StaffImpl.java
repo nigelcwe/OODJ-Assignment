@@ -129,26 +129,6 @@ public class StaffImpl implements StaffPort {
         return 1;
     }
 
-    @Override
-    public int deleteStaff(Staff staff) throws IOException {
-        ArrayList<String[]> oldAllStaff = new ArrayList<>();
-        oldAllStaff.addAll(allStaff);
-        updateAllStaff();
-
-        for (int i = 0; i < allStaff.size(); i++) {
-            String[] j = allStaff.get(i);
-            if (Integer.parseInt(j[0]) == staff.getId()) {
-                allStaff.remove(i);
-                break;
-            }
-        }
-
-        tf.write(file, allStaff);
-
-        if (oldAllStaff.size() > allStaff.size()) return 0;
-        else return 1;
-    }
-
 //    no validation performed here, please validate before using
     @Override
     public int createStaff(Staff staff) throws IOException {
