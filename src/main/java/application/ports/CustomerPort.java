@@ -1,6 +1,6 @@
-package ports;
+package application.ports;
 
-import entities.Customer;
+import domain.entities.Customer;
 
 import java.io.IOException;
 import java.util.ArrayList;

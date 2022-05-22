@@ -1,6 +1,6 @@
-package ports;
+package application.ports;
 
-import entities.Report;
+import domain.entities.Report;
 
 import java.io.IOException;
 import java.time.LocalDateTime;

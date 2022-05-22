@@ -1,9 +1,9 @@
-package impls;
-import enums.FileSelection;
-import entities.shared.TextFile;
-import enums.Role;
-import entities.Staff;
-import ports.StaffPort;
+package application.impls;
+import application.ports.StaffPort;
+import domain.enums.FileSelection;
+import application.entities.TextFile;
+import domain.enums.Role;
+import domain.entities.Staff;
 
 import java.io.File;
 import java.io.IOException;

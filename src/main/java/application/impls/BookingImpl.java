@@ -1,9 +1,9 @@
-package impls;
+package application.impls;
 
-import entities.Booking;
-import entities.shared.TextFile;
-import enums.FileSelection;
-import ports.BookingPort;
+import application.ports.BookingPort;
+import domain.entities.Booking;
+import application.entities.TextFile;
+import domain.enums.FileSelection;
 
 import java.io.File;
 import java.io.IOException;

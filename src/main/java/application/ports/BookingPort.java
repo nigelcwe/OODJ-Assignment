@@ -1,6 +1,6 @@
-package ports;
+package application.ports;
 
-import entities.Booking;
+import domain.entities.Booking;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -11,36 +11,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="file://$MODULE_DIR$/com/assignment/src/External Jars/Bouncy Castle Jars" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-        <jarDirectory url="file://$MODULE_DIR$/com/assignment/src/External Jars/Bouncy Castle Jars" recursive="false" />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="file://$MODULE_DIR$/com/assignment/src/External Jars/iText 7.2.2 Jars" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-        <jarDirectory url="file://$MODULE_DIR$/com/assignment/src/External Jars/iText 7.2.2 Jars" recursive="false" />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="file://$MODULE_DIR$/com/assignment/src/External Jars/slf4j Jars" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-        <jarDirectory url="file://$MODULE_DIR$/com/assignment/src/External Jars/slf4j Jars" recursive="false" />
-      </library>
-    </orderEntry>
     <orderEntry type="library" name="Maven: com.itextpdf:barcodes:7.2.2" level="project" />
     <orderEntry type="library" name="Maven: com.itextpdf:font-asian:7.2.2" level="project" />
     <orderEntry type="library" name="Maven: com.itextpdf:forms:7.2.2" level="project" />

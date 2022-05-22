@@ -4,9 +4,9 @@
  */
 package gui;
 
-import entities.Staff;
-import entities.shared.GymSystem;
-import enums.Role;
+import domain.entities.Staff;
+import application.entities.GymSystem;
+import domain.enums.Role;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

@@ -1,7 +1,7 @@
-package ports;
+package application.ports;
 
-import enums.Role;
-import entities.Staff;
+import domain.enums.Role;
+import domain.entities.Staff;
 
 import java.io.IOException;
 import java.util.ArrayList;

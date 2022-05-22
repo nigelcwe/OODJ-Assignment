@@ -1,6 +1,6 @@
-package entities.shared;
+package application.entities;
 
-import enums.Separator;
+import domain.enums.Separator;
 
 import java.io.*;
 import java.util.ArrayList;

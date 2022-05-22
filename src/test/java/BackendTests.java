@@ -1,4 +1,4 @@
-import entities.shared.GymSystem;
+import application.entities.GymSystem;
 
 import java.time.LocalDateTime;
 
