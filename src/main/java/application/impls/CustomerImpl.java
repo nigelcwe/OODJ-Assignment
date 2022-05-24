@@ -8,6 +8,7 @@ import domain.enums.FileSelection;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 public class CustomerImpl implements CustomerPort {

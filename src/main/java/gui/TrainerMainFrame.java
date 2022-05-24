@@ -4,6 +4,10 @@
  */
 package gui;
 
+import application.entities.GymSystem;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Johan
@@ -35,7 +39,7 @@ public class TrainerMainFrame extends javax.swing.JFrame {
         jCheckBox1 = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        trainerSessionListbox = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Trainer Management Menu");
@@ -52,17 +56,12 @@ public class TrainerMainFrame extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Upcoming Sessions");
 
-        jCheckBox1.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox1.setText("Paid ?");
 
         jButton1.setText("Complete Session");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(jList1);
+        trainerSessionListbox.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(trainerSessionListbox);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -174,7 +173,13 @@ public class TrainerMainFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TrainerMainFrame().setVisible(true);
+                try {
+                    new TrainerMainFrame().setVisible(true);
+                    GymSystem gym = new GymSystem();
+//                    trainerSessionListbox.list(gym.getBooking().getAllBooking());
+                } catch (Exception ex) {
+                    Logger.getLogger(TrainerMainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -186,9 +191,9 @@ public class TrainerMainFrame extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JList<String> trainerSessionListbox;
     // End of variables declaration//GEN-END:variables
 }

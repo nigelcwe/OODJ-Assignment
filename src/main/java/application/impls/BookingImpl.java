@@ -27,6 +27,7 @@ public class BookingImpl implements BookingPort {
 
     @Override
     public int generateId() throws IOException {
+        updateAllBooking();
         ArrayList<String[]> reverseAllBooking = new ArrayList<>();
         reverseAllBooking.addAll(allBooking);
         updateAllBooking();
@@ -51,12 +52,14 @@ public class BookingImpl implements BookingPort {
     }
 
     @Override
-    public ArrayList<String[]> getAllBooking() {
+    public ArrayList<String[]> getAllBooking() throws IOException {
+        updateAllBooking();
         return allBooking;
     }
 
     @Override
-    public Booking getById(int id) {
+    public Booking getById(int id) throws IOException {
+        updateAllBooking();
         for (String[] i : allBooking) {
             if (Integer.parseInt(i[0]) == id) {
                 return getBooking(i);
@@ -66,7 +69,8 @@ public class BookingImpl implements BookingPort {
     }
 
     @Override
-    public ArrayList<String[]> getByCustomerId(int id) {
+    public ArrayList<String[]> getByCustomerId(int id) throws IOException {
+        updateAllBooking();
         ArrayList<String[]> finalArrayList = new ArrayList<>();
 
         for (String[] i : allBooking) {
@@ -80,7 +84,8 @@ public class BookingImpl implements BookingPort {
     }
 
     @Override
-    public ArrayList<String[]> getByTrainerId(int id) {
+    public ArrayList<String[]> getByTrainerId(int id) throws IOException {
+        updateAllBooking();
         ArrayList<String[]> finalArrayList = new ArrayList<>();
 
         for (String[] i : allBooking) {
@@ -94,7 +99,8 @@ public class BookingImpl implements BookingPort {
     }
 
     @Override
-    public ArrayList<String[]> getPaid() {
+    public ArrayList<String[]> getPaid() throws IOException {
+        updateAllBooking();
         ArrayList<String[]> finalArrayList = new ArrayList<>();
 
         for (String[] i : allBooking) {
@@ -108,7 +114,8 @@ public class BookingImpl implements BookingPort {
     }
 
     @Override
-    public ArrayList<String[]> getUnpaid() {
+    public ArrayList<String[]> getUnpaid() throws IOException {
+        updateAllBooking();
         ArrayList<String[]> finalArrayList = new ArrayList<>();
 
         for (String[] i : allBooking) {
@@ -122,7 +129,8 @@ public class BookingImpl implements BookingPort {
     }
 
     @Override
-    public ArrayList<String[]> getCompleted() {
+    public ArrayList<String[]> getCompleted() throws IOException {
+        updateAllBooking();
         ArrayList<String[]> finalArrayList = new ArrayList<>();
 
         for (String[] i : allBooking) {
@@ -136,7 +144,8 @@ public class BookingImpl implements BookingPort {
     }
 
     @Override
-    public ArrayList<String[]> getIncomplete() {
+    public ArrayList<String[]> getIncomplete() throws IOException {
+        updateAllBooking();
         ArrayList<String[]> finalArrayList = new ArrayList<>();
 
         for (String[] i : allBooking) {

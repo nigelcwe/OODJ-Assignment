@@ -55,7 +55,8 @@ public class LoginFrame extends javax.swing.JFrame {
         loginFailDial.setSize(new java.awt.Dimension(250, 180));
         loginFailDial.setLocationRelativeTo(null);
 
-        loginFailLbl.setText("Incorrect username or password !");
+        loginFailLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        loginFailLbl.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         loginFailBtn.setText("Back");
         loginFailBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -69,49 +70,41 @@ public class LoginFrame extends javax.swing.JFrame {
         loginFailPanelLayout.setHorizontalGroup(
             loginFailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(loginFailPanelLayout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
-                .addGroup(loginFailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginFailPanelLayout.createSequentialGroup()
-                        .addComponent(loginFailLbl)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginFailPanelLayout.createSequentialGroup()
-                        .addComponent(loginFailBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(56, 56, 56))))
+                .addContainerGap()
+                .addComponent(loginFailLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(loginFailPanelLayout.createSequentialGroup()
+                .addGap(75, 75, 75)
+                .addComponent(loginFailBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         loginFailPanelLayout.setVerticalGroup(
             loginFailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(loginFailPanelLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(loginFailLbl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(loginFailBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addComponent(loginFailLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(loginFailBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout loginFailDialLayout = new javax.swing.GroupLayout(loginFailDial.getContentPane());
         loginFailDial.getContentPane().setLayout(loginFailDialLayout);
         loginFailDialLayout.setHorizontalGroup(
             loginFailDialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(loginFailPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(loginFailDialLayout.createSequentialGroup()
+                .addComponent(loginFailPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         loginFailDialLayout.setVerticalGroup(
             loginFailDialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(loginFailPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(loginFailDialLayout.createSequentialGroup()
+                .addComponent(loginFailPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("AGC Management System");
-
-        loginNameTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginNameTxtActionPerformed(evt);
-            }
-        });
-
-        loginPasstxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginPasstxtActionPerformed(evt);
-            }
-        });
 
         loginNameLbl.setText("Username :");
 
@@ -195,30 +188,25 @@ public class LoginFrame extends javax.swing.JFrame {
             String password = String.valueOf(loginPasstxt.getPassword());
             GymSystem gym = new GymSystem();
             Staff staff = gym.getStaff().login(username, password);
-
-            if (staff == null) {
+            if (gym.getStaff().validation(username) == 1 ) {
+                loginFailLbl.setText("Invalid characters used !");
                 loginFailDial.setVisible(true);
-
-            } else if (staff.getRole().equals(Role.Manager)) {
-                this.setVisible(false);
-                new ManagerMainFrame().setVisible(true);
-
-            } else if (staff.getRole().equals(Role.Trainer)) {
-                this.setVisible(false);
-                new TrainerMainFrame().setVisible(true);
-            }
+            } else if (gym.getStaff().validation(username) == 0 ) {
+                if (staff == null) {
+                    loginFailLbl.setText("Incorrect username or password !");
+                    loginFailDial.setVisible(true);
+                } else if (staff.getRole().equals(Role.Manager)) {
+                    this.setVisible(false);
+                    new ManagerMain().setVisible(true);
+                } else if (staff.getRole().equals(Role.Trainer)) {
+                    this.setVisible(false);
+                    new TrainerMainFrame().setVisible(true);
+                }
+            }           
         } catch (Exception ex) {
             Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_loginLoginbtnActionPerformed
-
-    private void loginPasstxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginPasstxtActionPerformed
-
-    }//GEN-LAST:event_loginPasstxtActionPerformed
-
-    private void loginNameTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginNameTxtActionPerformed
-
-    }//GEN-LAST:event_loginNameTxtActionPerformed
 
     /**
      * @param args the command line arguments
