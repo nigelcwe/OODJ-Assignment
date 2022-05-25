@@ -15,11 +15,12 @@ import java.util.logging.Logger;
  * @author Johan
  */
 public class LoginFrame extends javax.swing.JFrame {
+    GymSystem gym = new GymSystem();
 
     /**
      * Creates new form LoginFrame
      */
-    public LoginFrame() {
+    public LoginFrame() throws Exception {
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -186,7 +187,6 @@ public class LoginFrame extends javax.swing.JFrame {
         try {
             String username = loginNameTxt.getText();
             String password = String.valueOf(loginPasstxt.getPassword());
-            GymSystem gym = new GymSystem();
             Staff staff = gym.getStaff().login(username, password);
             if (gym.getStaff().validation(username) == 1 ) {
                 loginFailLbl.setText("Invalid characters used !");
@@ -240,7 +240,11 @@ public class LoginFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LoginFrame().setVisible(true);
+                try {
+                    new LoginFrame().setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
