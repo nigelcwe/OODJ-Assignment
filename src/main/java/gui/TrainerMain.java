@@ -415,6 +415,7 @@ public class TrainerMain extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             if (tblBookings.getSelectedRow() == -1) throw new Exception("Please select a booking to complete!");
+            if (tblBookings.getSelectedRows().length > 1) throw new Exception(("Only ONE booking can be completed at a time!"));
             if (!cboPaid.isSelected()) throw new Exception("Bookings must be paid to be completed!");
             int validation = gym.getStaff().validation(txtFeedback.getText());
             if (validation == 1) throw new Exception("Your feedback contains invalid characters. Please try again!");

@@ -533,6 +533,8 @@ public class ManagerMain extends javax.swing.JFrame {
             );
             LocalDateTime endTime = startTime.plusHours(Integer.parseInt(spinBookingDuration.getValue().toString()));
 
+            if (startTime.isBefore(LocalDateTime.now())) throw new Exception("Invalid booking date!");
+
             Booking newBooking = new Booking(
                     gym.getBooking().generateId(),
                     customerId,
