@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  * @author Johan
  */
 public class LoginFrame extends javax.swing.JFrame {
-    GymSystem gym = new GymSystem();
+    private final GymSystem gym = new GymSystem();
 
     /**
      * Creates new form LoginFrame
