@@ -25,6 +25,7 @@ public class StaffImpl implements StaffPort {
 
     @Override
     public int generateId() throws IOException {
+        updateAllStaff();
         ArrayList<String[]> reverseAllStaff = new ArrayList<>();
         reverseAllStaff.addAll(allStaff);
         updateAllStaff();
@@ -48,12 +49,14 @@ public class StaffImpl implements StaffPort {
     }
 
     @Override
-    public ArrayList<String[]> getAllStaff() {
+    public ArrayList<String[]> getAllStaff() throws IOException {
+        updateAllStaff();
         return allStaff;
     }
 
     @Override
-    public ArrayList<String[]> getByRole(Role role) {
+    public ArrayList<String[]> getByRole(Role role) throws IOException {
+        updateAllStaff();
         ArrayList<String[]> finalArrayList = new ArrayList<>();
 
         for (String[] i : allStaff) {
@@ -67,7 +70,8 @@ public class StaffImpl implements StaffPort {
     }
 
     @Override
-    public Staff getById(int id) {
+    public Staff getById(int id) throws IOException {
+        updateAllStaff();
         for (String[] i : allStaff) {
             if (Integer.parseInt(i[0]) == id) {
                 return getStaff(i);
@@ -77,7 +81,8 @@ public class StaffImpl implements StaffPort {
     }
 
     @Override
-    public Staff getByUsername(String username) {
+    public Staff getByUsername(String username) throws IOException {
+        updateAllStaff();
         for (String[] i : allStaff) {
             if (i[5].equals(username)) {
                 return new Staff(
@@ -98,6 +103,7 @@ public class StaffImpl implements StaffPort {
 
     @Override
     public int modifyStaff(Staff staff) throws IOException {
+        updateAllStaff();
         ArrayList<String[]> oldAllStaff = new ArrayList<>();
         oldAllStaff.addAll(allStaff);
         updateAllStaff();
@@ -148,7 +154,8 @@ public class StaffImpl implements StaffPort {
     }
 
     @Override
-    public Staff login(String username, String password) {
+    public Staff login(String username, String password) throws IOException {
+        updateAllStaff();
         for (String[] i : allStaff) {
             if ((username.equals(i[5])) && (password.equals(i[6]))) {
                 return new Staff(
@@ -168,9 +175,9 @@ public class StaffImpl implements StaffPort {
     }
 
     @Override
-    public int validation(String usernameOrPassword) {
+    public int validation(String string) {
         for (String i : invalidChars) {
-            if (usernameOrPassword.contains(i)) return 1;
+            if (string.contains(i)) return 1;
         }
         return 0;
     }

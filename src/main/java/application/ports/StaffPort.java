@@ -10,11 +10,11 @@ public interface StaffPort {
     int generateId() throws IOException;
     Staff getStaff(String[] strArray);
     ArrayList<String[]> getAllStaff() throws IOException;
-    ArrayList<String[]> getByRole(Role role);
-    Staff getById(int id);
-    Staff getByUsername(String username);
+    ArrayList<String[]> getByRole(Role role) throws IOException;
+    Staff getById(int id) throws IOException;
+    Staff getByUsername(String username) throws IOException;
     int modifyStaff(Staff staff) throws IOException;
     int createStaff(Staff staff) throws IOException;
-    Staff login(String username, String password);
+    Staff login(String username, String password) throws IOException;
     int validation (String usernameOrPassword);
 }

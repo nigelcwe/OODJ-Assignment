@@ -40,6 +40,7 @@ public class ReportImpl implements ReportPort {
 
     @Override
     public int generateId() throws IOException {
+        updateAllReport();
         ArrayList<String[]> reverseAllReport = new ArrayList<>();
         reverseAllReport.addAll(allReport);
         updateAllReport();
@@ -59,12 +60,14 @@ public class ReportImpl implements ReportPort {
     }
 
     @Override
-    public ArrayList<String[]> getAllReport() {
+    public ArrayList<String[]> getAllReport() throws IOException {
+        updateAllReport();
         return allReport;
     }
 
     @Override
-    public Report getById(int id) {
+    public Report getById(int id) throws IOException {
+        updateAllReport();
         for (String[] i : allReport) {
             if (Integer.parseInt(i[0]) == id) {
                 return getReport(i);
@@ -74,7 +77,8 @@ public class ReportImpl implements ReportPort {
     }
 
     @Override
-    public ArrayList<String[]> getByCustomerId(int id) {
+    public ArrayList<String[]> getByCustomerId(int id) throws IOException {
+        updateAllReport();
         ArrayList<String[]> finalArrayList = new ArrayList<>();
 
         for (String[] i : allReport) {
@@ -88,7 +92,8 @@ public class ReportImpl implements ReportPort {
     }
 
     @Override
-    public ArrayList<String[]> getByTrainerId(int id) {
+    public ArrayList<String[]> getByTrainerId(int id) throws IOException {
+        updateAllReport();
         ArrayList<String[]> finalArrayList = new ArrayList<>();
 
         for (String[] i : allReport) {
@@ -102,7 +107,8 @@ public class ReportImpl implements ReportPort {
     }
 
     @Override
-    public ArrayList<String[]> getByMonthAndYear(LocalDateTime date) {
+    public ArrayList<String[]> getByMonthAndYear(LocalDateTime date) throws IOException {
+        updateAllReport();
         ArrayList<String[]> finalArrayList = new ArrayList<>();
 
         for (String[] i : allReport) {
@@ -118,6 +124,7 @@ public class ReportImpl implements ReportPort {
 
     @Override
     public int modifyReport(Report report) throws IOException {
+        updateAllReport();
         ArrayList<String[]> oldAllReport = new ArrayList<>();
         oldAllReport.addAll(allReport);
         updateAllReport();

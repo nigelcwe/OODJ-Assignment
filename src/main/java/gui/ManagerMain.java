@@ -14,6 +14,7 @@ import domain.enums.Role;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ItemEvent;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -24,14 +25,22 @@ import java.util.ArrayList;
  * @author chanw
  */
 public class ManagerMain extends javax.swing.JFrame {
-    GymSystem gym = new GymSystem();
+    private Staff manager;
+    private final GymSystem gym = new GymSystem();
+    private int refreshMode = 0;
 
     /**
      * Creates new form ManagerMain
      */
     public ManagerMain() throws Exception {
         initComponents();
-        refresh();
+        refresh(this.refreshMode);
+    }
+
+    public ManagerMain(Staff manager) throws Exception {
+        initComponents();
+        this.manager = manager;
+        refresh(this.refreshMode);
     }
 
     /**
@@ -43,10 +52,17 @@ public class ManagerMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGrpFilter = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblIncompleteBookings = new javax.swing.JTable();
+        tblBookings = new javax.swing.JTable();
         btnDeleteBooking = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        rbtnAllBooking = new javax.swing.JRadioButton();
+        rbtnCompleted = new javax.swing.JRadioButton();
+        rbtnIncomplete = new javax.swing.JRadioButton();
+        btnSearch = new javax.swing.JButton();
+        btnRefresh = new javax.swing.JButton();
         managerBookPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         cmbBookingCustomer = new javax.swing.JComboBox<>();
@@ -71,25 +87,28 @@ public class ManagerMain extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         cmbReportMonth = new javax.swing.JComboBox<>();
         cmbReportYear = new javax.swing.JComboBox<>();
+        lblWelcome = new javax.swing.JLabel();
+        lblManagerName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Manager Home");
+        setResizable(false);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Incomplete Bookings"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Bookings", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI Historic", 0, 12))); // NOI18N
 
-        tblIncompleteBookings.setModel(new javax.swing.table.DefaultTableModel(
+        tblBookings.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "id", "Customer Name", "Trainer Name", "Booking Date", "Start Time", "End Time"
+                "id", "Customer Name", "Trainer Name", "Booking Date", "Start Time", "End Time", "Completion Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -100,9 +119,9 @@ public class ManagerMain extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblIncompleteBookings.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        tblIncompleteBookings.setName("tblIncompleteBooking"); // NOI18N
-        jScrollPane2.setViewportView(tblIncompleteBookings);
+        tblBookings.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tblBookings.setName("tblIncompleteBooking"); // NOI18N
+        jScrollPane2.setViewportView(tblBookings);
 
         btnDeleteBooking.setText("Delete Selected Booking");
         btnDeleteBooking.addActionListener(new java.awt.event.ActionListener() {
@@ -111,6 +130,79 @@ public class ManagerMain extends javax.swing.JFrame {
             }
         });
 
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Filter by:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI Historic", 0, 12))); // NOI18N
+
+        btnGrpFilter.add(rbtnAllBooking);
+        rbtnAllBooking.setSelected(true);
+        rbtnAllBooking.setText("All Bookings");
+        rbtnAllBooking.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rbtnAllBookingItemStateChanged(evt);
+            }
+        });
+
+        btnGrpFilter.add(rbtnCompleted);
+        rbtnCompleted.setText("Completed Bookings");
+        rbtnCompleted.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rbtnCompletedItemStateChanged(evt);
+            }
+        });
+
+        btnGrpFilter.add(rbtnIncomplete);
+        rbtnIncomplete.setText("Incomplete Bookings");
+        rbtnIncomplete.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rbtnIncompleteItemStateChanged(evt);
+            }
+        });
+
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+
+        btnRefresh.setText("Refresh");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(rbtnAllBooking, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(rbtnIncomplete, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
+                    .addComponent(rbtnCompleted, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(rbtnAllBooking)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rbtnIncomplete)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(rbtnCompleted))
+                    .addComponent(btnRefresh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -118,7 +210,8 @@ public class ManagerMain extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 767, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnDeleteBooking, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -126,13 +219,15 @@ public class ManagerMain extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnDeleteBooking, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDeleteBooking, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        managerBookPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Training Booking"));
+        managerBookPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Training Booking", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI Historic", 0, 12))); // NOI18N
 
         jLabel2.setText("Customer:");
 
@@ -187,19 +282,12 @@ public class ManagerMain extends javax.swing.JFrame {
                     .addComponent(btnBooking, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(managerBookPanelLayout.createSequentialGroup()
                         .addGroup(managerBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(managerBookPanelLayout.createSequentialGroup()
-                                .addGroup(managerBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(managerBookPanelLayout.createSequentialGroup()
-                                        .addGroup(managerBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jLabel6)
-                                            .addComponent(jLabel3))
-                                        .addGap(0, 0, Short.MAX_VALUE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(managerBookPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(36, 36, 36)))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(managerBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cmbBookingTrainer, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(spinBookingDuration)
@@ -210,7 +298,7 @@ public class ManagerMain extends javax.swing.JFrame {
                             .addGroup(managerBookPanelLayout.createSequentialGroup()
                                 .addComponent(cmbBookingDay, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmbBookingMonth, 0, 139, Short.MAX_VALUE)
+                                .addComponent(cmbBookingMonth, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cmbBookingYear, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(cmbBookingCustomer, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -247,7 +335,7 @@ public class ManagerMain extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Navigation"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Navigation", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI Historic", 0, 12))); // NOI18N
 
         btnRegistration.setText("Registration");
         btnRegistration.addActionListener(new java.awt.event.ActionListener() {
@@ -294,7 +382,7 @@ public class ManagerMain extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Report Generation"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Report Generation", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI Historic", 0, 12))); // NOI18N
         jPanel3.setName(""); // NOI18N
 
         btnGenerateReport.setText("Generate Report");
@@ -324,11 +412,11 @@ public class ManagerMain extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnGenerateReport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(95, 95, 95)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmbReportMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbReportYear, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(cmbReportYear, 0, 88, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -344,18 +432,32 @@ public class ManagerMain extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        lblWelcome.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        lblWelcome.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblWelcome.setText("Welcome back,");
+
+        lblManagerName.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        lblManagerName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(lblWelcome)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblManagerName, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(managerBookPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(managerBookPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -363,13 +465,19 @@ public class ManagerMain extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(managerBookPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblManagerName, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -418,10 +526,10 @@ public class ManagerMain extends javax.swing.JFrame {
 
     private void btnBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookingActionPerformed
         // TODO add your handling code here:
-        ArrayList<String[]> allCustomer = gym.getCustomer().getAllCustomer();
-        ArrayList<String[]> allTrainer = gym.getStaff().getByRole(Role.Trainer);
 
         try {
+            ArrayList<String[]> allCustomer = gym.getCustomer().getAllCustomer();
+            ArrayList<String[]> allTrainer = gym.getStaff().getByRole(Role.Trainer);
             int customerId = -1;
             int trainerId = -1;
             for (String[] i : allCustomer) {
@@ -472,7 +580,7 @@ public class ManagerMain extends javax.swing.JFrame {
                 customer.setBookingId(newBooking.getId());
                 gym.getCustomer().modifyCustomer(customer);
                 JOptionPane.showMessageDialog(null, "Booking successfully created!", "Info", JOptionPane.INFORMATION_MESSAGE);
-                refresh();
+                refresh(this.refreshMode);
             } else throw new Exception("Booking was not created!");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -481,20 +589,21 @@ public class ManagerMain extends javax.swing.JFrame {
 
     private void btnDeleteBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteBookingActionPerformed
         // TODO add your handling code here:
-        int bookingId = Integer.parseInt(tblIncompleteBookings.getValueAt(tblIncompleteBookings.getSelectedRow(), 0).toString());
-
         try {
+            if (tblBookings.getSelectedRow() == -1) throw new Exception("Please select a booking to be deleted!");
+            if (tblBookings.getSelectedRows().length > 1) throw new Exception("Please select only ONE booking!");
+            int bookingId = Integer.parseInt(tblBookings.getValueAt(tblBookings.getSelectedRow(), 0).toString());
             Booking booking = gym.getBooking().getById(bookingId);
+            if (booking.isCompleted()) throw new Exception("Completed bookings cannot be deleted!");
             int status = gym.getBooking().deleteBooking(booking);
 
-            if (status == 0) {
-                Customer customer = gym.getCustomer().getById(booking.getCustomerId());
-                customer.setBookingId(-1);
-                gym.getCustomer().modifyCustomer(customer);
-                refresh();
-                JOptionPane.showMessageDialog(null, "Booking successfully deleted!", "Info", JOptionPane.INFORMATION_MESSAGE);
-            }
-            else throw new Exception("Booking was not deleted.");
+            if (status == 1) throw new Exception("Booking was not deleted");
+
+            Customer customer = gym.getCustomer().getById(booking.getCustomerId());
+            customer.setBookingId(-1);
+            gym.getCustomer().modifyCustomer(customer);
+            refresh(this.refreshMode);
+            JOptionPane.showMessageDialog(null, "Booking successfully deleted!", "Info", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -504,13 +613,39 @@ public class ManagerMain extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setVisible(false);
         new LoginFrame().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnLogOutActionPerformed
 
-    public void clear() {
-        DefaultTableModel tblModel = (DefaultTableModel) tblIncompleteBookings.getModel();
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+        refresh(this.refreshMode);
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        // TODO add your handling code here:
+        refresh(0);
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
+    private void rbtnAllBookingItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbtnAllBookingItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == ItemEvent.SELECTED) this.refreshMode = 0;
+    }//GEN-LAST:event_rbtnAllBookingItemStateChanged
+
+    private void rbtnIncompleteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbtnIncompleteItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == ItemEvent.SELECTED) this.refreshMode = 1;
+    }//GEN-LAST:event_rbtnIncompleteItemStateChanged
+
+    private void rbtnCompletedItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbtnCompletedItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == ItemEvent.SELECTED) this.refreshMode = 2;
+    }//GEN-LAST:event_rbtnCompletedItemStateChanged
+
+    private void clear() {
+        DefaultTableModel tblModel = (DefaultTableModel) tblBookings.getModel();
 
         try {
-            while (tblIncompleteBookings.getRowCount() > 0) {
+            while (tblBookings.getRowCount() > 0) {
                 tblModel.removeRow(0);
             }
 
@@ -535,31 +670,111 @@ public class ManagerMain extends javax.swing.JFrame {
         }
     }
 
-    public void refresh() {
-        DefaultTableModel tblModel = (DefaultTableModel) tblIncompleteBookings.getModel();
-        DefaultComboBoxModel cmbBookingCustomerModel = (DefaultComboBoxModel) cmbBookingCustomer.getModel();
-        DefaultComboBoxModel cmbBookingTrainerModel = (DefaultComboBoxModel) cmbBookingTrainer.getModel();
-        DefaultComboBoxModel cmbBookingYearModel = (DefaultComboBoxModel) cmbBookingYear.getModel();
-        ArrayList<String[]> allCustomer = gym.getCustomer().getAllCustomer();
-        ArrayList<String[]> allTrainer = gym.getStaff().getByRole(Role.Trainer);
-
+    private void refresh(int mode) {
         try {
-            ArrayList<String[]> allIncompleteBooking = gym.getBooking().getIncomplete();
+            DefaultTableModel tblModel = (DefaultTableModel) tblBookings.getModel();
+            DefaultComboBoxModel cmbBookingCustomerModel = (DefaultComboBoxModel) cmbBookingCustomer.getModel();
+            DefaultComboBoxModel cmbBookingTrainerModel = (DefaultComboBoxModel) cmbBookingTrainer.getModel();
+            DefaultComboBoxModel cmbBookingYearModel = (DefaultComboBoxModel) cmbBookingYear.getModel();
+            ArrayList<String[]> allCustomer = gym.getCustomer().getAllCustomer();
+            ArrayList<String[]> allTrainer = gym.getStaff().getByRole(Role.Trainer);
+
             clear();
 
-            for (String[] i : allIncompleteBooking) {
-                Booking bookingI = gym.getBooking().getBooking(i);
-                Customer customerI = gym.getCustomer().getById(Integer.parseInt(i[1]));
-                Staff trainerI = gym.getStaff().getById(Integer.parseInt(i[2]));
-                String[] row = {
-                        i[0],
-                        customerI.getFullName(),
-                        trainerI.getFullName(),
-                        bookingI.getStartTime().toLocalDate().toString(),
-                        bookingI.getStartTime().toLocalTime().toString(),
-                        bookingI.getEndTime().toLocalTime().toString()
-                };
-                tblModel.addRow(row);
+            lblManagerName.setText(this.manager.getFullName());
+
+            if (mode == 0) {
+                clear();
+                ArrayList<String[]> allBooking = gym.getBooking().getAllBooking();
+
+                for (String[] i : allBooking) {
+                    Booking bookingI = gym.getBooking().getBooking(i);
+                    Customer customerI = gym.getCustomer().getById(Integer.parseInt(i[1]));
+                    Staff trainerI = gym.getStaff().getById(Integer.parseInt(i[2]));
+                    String[] row = {
+                            i[0],
+                            customerI.getFullName(),
+                            trainerI.getFullName(),
+                            bookingI.getStartTime().toLocalDate().toString(),
+                            bookingI.getStartTime().toLocalTime().toString(),
+                            bookingI.getEndTime().toLocalTime().toString(),
+                            String.valueOf(bookingI.isCompleted())
+                    };
+                    tblModel.addRow(row);
+                }
+
+                ArrayList<Integer> bookingYear = new ArrayList<>();
+                for (String[] l : allBooking) {
+                    Booking bookingL = gym.getBooking().getBooking(l);
+                    if (bookingL.getStartTime().getYear() == Integer.parseInt(cmbBookingYearModel.getElementAt(1).toString()))
+                        continue;
+                    if ((bookingYear.size() == 0) || (bookingYear.get(bookingYear.size() - 1) != bookingL.getStartTime().getYear())) {
+                        bookingYear.add(bookingL.getStartTime().getYear());
+                    }
+                }
+                cmbBookingYearModel.addAll(bookingYear);
+
+            } else if (mode == 1) {
+                clear();
+                ArrayList<String[]> allIncompleteBooking = gym.getBooking().getIncomplete();
+
+                for (String[] i : allIncompleteBooking) {
+                    Booking bookingI = gym.getBooking().getBooking(i);
+                    Customer customerI = gym.getCustomer().getById(Integer.parseInt(i[1]));
+                    Staff trainerI = gym.getStaff().getById(Integer.parseInt(i[2]));
+                    String[] row = {
+                            i[0],
+                            customerI.getFullName(),
+                            trainerI.getFullName(),
+                            bookingI.getStartTime().toLocalDate().toString(),
+                            bookingI.getStartTime().toLocalTime().toString(),
+                            bookingI.getEndTime().toLocalTime().toString(),
+                            String.valueOf(bookingI.isCompleted())
+                    };
+                    tblModel.addRow(row);
+                }
+
+                ArrayList<Integer> bookingYear = new ArrayList<>();
+                for (String[] l : allIncompleteBooking) {
+                    Booking bookingL = gym.getBooking().getBooking(l);
+                    if (bookingL.getStartTime().getYear() == Integer.parseInt(cmbBookingYearModel.getElementAt(1).toString()))
+                        continue;
+                    if ((bookingYear.size() == 0) || (bookingYear.get(bookingYear.size() - 1) != bookingL.getStartTime().getYear())) {
+                        bookingYear.add(bookingL.getStartTime().getYear());
+                    }
+                }
+                cmbBookingYearModel.addAll(bookingYear);
+
+            } else if (mode == 2) {
+                clear();
+                ArrayList<String[]> allCompletedBooking = gym.getBooking().getCompleted();
+
+                for (String[] i : allCompletedBooking) {
+                    Booking bookingI = gym.getBooking().getBooking(i);
+                    Customer customerI = gym.getCustomer().getById(Integer.parseInt(i[1]));
+                    Staff trainerI = gym.getStaff().getById(Integer.parseInt(i[2]));
+                    String[] row = {
+                            i[0],
+                            customerI.getFullName(),
+                            trainerI.getFullName(),
+                            bookingI.getStartTime().toLocalDate().toString(),
+                            bookingI.getStartTime().toLocalTime().toString(),
+                            bookingI.getEndTime().toLocalTime().toString(),
+                            String.valueOf(bookingI.isCompleted())
+                    };
+                    tblModel.addRow(row);
+                }
+
+                ArrayList<Integer> bookingYear = new ArrayList<>();
+                for (String[] l : allCompletedBooking) {
+                    Booking bookingL = gym.getBooking().getBooking(l);
+                    if (bookingL.getStartTime().getYear() == Integer.parseInt(cmbBookingYearModel.getElementAt(1).toString()))
+                        continue;
+                    if ((bookingYear.size() == 0) || (bookingYear.get(bookingYear.size() - 1) != bookingL.getStartTime().getYear())) {
+                        bookingYear.add(bookingL.getStartTime().getYear());
+                    }
+                }
+                cmbBookingYearModel.addAll(bookingYear);
             }
 
             ArrayList<String> customerFullName = new ArrayList<>();
@@ -575,17 +790,6 @@ public class ManagerMain extends javax.swing.JFrame {
                 trainerFullName.add(trainerK.getFullName());
             }
             cmbBookingTrainerModel.addAll(trainerFullName);
-
-            ArrayList<Integer> bookingYear = new ArrayList<>();
-            for (String[] l : allIncompleteBooking) {
-                Booking bookingL = gym.getBooking().getBooking(l);
-                if (bookingL.getStartTime().getYear() == Integer.parseInt(cmbBookingYearModel.getElementAt(1).toString()))
-                    continue;
-                if ((bookingYear.size() == 0) || (bookingYear.get(bookingYear.size() - 1) != bookingL.getStartTime().getYear())) {
-                    bookingYear.add(bookingL.getStartTime().getYear());
-                }
-            }
-            cmbBookingYearModel.addAll(bookingYear);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -636,8 +840,11 @@ public class ManagerMain extends javax.swing.JFrame {
     private javax.swing.JButton btnDeleteBooking;
     private javax.swing.JButton btnEditDetails;
     private javax.swing.JButton btnGenerateReport;
+    private javax.swing.ButtonGroup btnGrpFilter;
     private javax.swing.JButton btnLogOut;
+    private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnRegistration;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JComboBox<String> cmbBookingCustomer;
     private javax.swing.JComboBox<String> cmbBookingDay;
     private javax.swing.JComboBox<String> cmbBookingMonth;
@@ -654,11 +861,17 @@ public class ManagerMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblManagerName;
+    private javax.swing.JLabel lblWelcome;
     private javax.swing.JPanel managerBookPanel;
+    private javax.swing.JRadioButton rbtnAllBooking;
+    private javax.swing.JRadioButton rbtnCompleted;
+    private javax.swing.JRadioButton rbtnIncomplete;
     private javax.swing.JSpinner spinBookingDuration;
     private javax.swing.JSpinner spinBookingHour;
     private javax.swing.JSpinner spinBookingMinute;
-    private javax.swing.JTable tblIncompleteBookings;
+    private javax.swing.JTable tblBookings;
     // End of variables declaration//GEN-END:variables
 }

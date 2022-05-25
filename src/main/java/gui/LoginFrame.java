@@ -197,10 +197,12 @@ public class LoginFrame extends javax.swing.JFrame {
                     loginFailDial.setVisible(true);
                 } else if (staff.getRole().equals(Role.Manager)) {
                     this.setVisible(false);
-                    new ManagerMain().setVisible(true);
+                    new ManagerMain(staff).setVisible(true);
+                    this.dispose();
                 } else if (staff.getRole().equals(Role.Trainer)) {
                     this.setVisible(false);
-                    new TrainerMainFrame().setVisible(true);
+                    new TrainerMain(staff).setVisible(true);
+                    this.dispose();
                 }
             }           
         } catch (Exception ex) {

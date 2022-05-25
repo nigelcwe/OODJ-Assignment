@@ -8,7 +8,6 @@ import domain.enums.FileSelection;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 public class CustomerImpl implements CustomerPort {
@@ -25,6 +24,8 @@ public class CustomerImpl implements CustomerPort {
 
     @Override
     public int generateId() throws IOException {
+        updateAllCustomer();
+        updateAllCustomer();
         ArrayList<String[]> reverseAllCustomer = new ArrayList<>();
         reverseAllCustomer.addAll(allCustomer);
         updateAllCustomer();
@@ -45,12 +46,14 @@ public class CustomerImpl implements CustomerPort {
     }
 
     @Override
-    public ArrayList<String[]> getAllCustomer() {
+    public ArrayList<String[]> getAllCustomer() throws IOException {
+        updateAllCustomer();
         return allCustomer;
     }
 
     @Override
-    public Customer getById(int id) {
+    public Customer getById(int id) throws IOException {
+        updateAllCustomer();
         for (String[] i : allCustomer) {
             if (Integer.parseInt(i[0]) == id) {
                 return getCustomer(i);
@@ -61,6 +64,7 @@ public class CustomerImpl implements CustomerPort {
 
     @Override
     public int modifyCustomer(Customer customer) throws IOException {
+        updateAllCustomer();
         ArrayList<String[]> oldAllCustomer = new ArrayList<>();
         oldAllCustomer.addAll(allCustomer);
         updateAllCustomer();

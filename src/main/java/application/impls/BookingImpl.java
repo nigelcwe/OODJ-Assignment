@@ -28,6 +28,7 @@ public class BookingImpl implements BookingPort {
     @Override
     public int generateId() throws IOException {
         updateAllBooking();
+        updateAllBooking();
         ArrayList<String[]> reverseAllBooking = new ArrayList<>();
         reverseAllBooking.addAll(allBooking);
         updateAllBooking();
