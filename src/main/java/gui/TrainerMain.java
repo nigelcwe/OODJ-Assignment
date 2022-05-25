@@ -102,11 +102,6 @@ public class TrainerMain extends javax.swing.JFrame {
         cmbBookingDay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Day", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
         cmbBookingMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Month", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
-        cmbBookingMonth.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbBookingMonthActionPerformed(evt);
-            }
-        });
 
         cmbBookingYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Year", "2022" }));
 
@@ -124,22 +119,12 @@ public class TrainerMain extends javax.swing.JFrame {
                 rbtnDateItemStateChanged(evt);
             }
         });
-        rbtnDate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbtnDateActionPerformed(evt);
-            }
-        });
 
         btnGrpFilter.add(rbtnStartTime);
         rbtnStartTime.setText("Start Time:");
         rbtnStartTime.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 rbtnStartTimeItemStateChanged(evt);
-            }
-        });
-        rbtnStartTime.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                rbtnStartTimeStateChanged(evt);
             }
         });
 
@@ -236,11 +221,6 @@ public class TrainerMain extends javax.swing.JFrame {
         });
 
         cboPaid.setText("Paid ?");
-        cboPaid.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboPaidActionPerformed(evt);
-            }
-        });
 
         txtFeedback.setText("Feedback");
 
@@ -353,18 +333,6 @@ public class TrainerMain extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cboPaidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboPaidActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cboPaidActionPerformed
-
-    private void cmbBookingMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBookingMonthActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbBookingMonthActionPerformed
-
-    private void rbtnDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnDateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbtnDateActionPerformed
-
     private void rbtnDateItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbtnDateItemStateChanged
         // TODO add your handling code here:
         if (evt.getStateChange() == ItemEvent.SELECTED) {
@@ -377,10 +345,6 @@ public class TrainerMain extends javax.swing.JFrame {
             cmbBookingYear.setEnabled(false);
         }
     }//GEN-LAST:event_rbtnDateItemStateChanged
-
-    private void rbtnStartTimeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rbtnStartTimeStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbtnStartTimeStateChanged
 
     private void rbtnStartTimeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbtnStartTimeItemStateChanged
         // TODO add your handling code here:

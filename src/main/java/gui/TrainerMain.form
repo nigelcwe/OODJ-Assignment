@@ -275,9 +275,6 @@
                   </StringArray>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbBookingMonthActionPerformed"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
@@ -321,7 +318,6 @@
               </Properties>
               <Events>
                 <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="rbtnDateItemStateChanged"/>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtnDateActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JRadioButton" name="rbtnStartTime">
@@ -333,7 +329,6 @@
               </Properties>
               <Events>
                 <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="rbtnStartTimeItemStateChanged"/>
-                <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rbtnStartTimeStateChanged"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnReset">
@@ -415,9 +410,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Paid ?"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cboPaidActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtFeedback">
           <Properties>

@@ -232,11 +232,6 @@ public class ManagerMain extends javax.swing.JFrame {
         jLabel2.setText("Customer:");
 
         cmbBookingCustomer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Name" }));
-        cmbBookingCustomer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbBookingCustomerActionPerformed(evt);
-            }
-        });
 
         cmbBookingTrainer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Name" }));
 
@@ -262,11 +257,6 @@ public class ManagerMain extends javax.swing.JFrame {
         cmbBookingDay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Day", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
         cmbBookingMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Month", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
-        cmbBookingMonth.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbBookingMonthActionPerformed(evt);
-            }
-        });
 
         cmbBookingYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Year", "2022" }));
 
@@ -395,11 +385,6 @@ public class ManagerMain extends javax.swing.JFrame {
         jLabel7.setText("Date: ");
 
         cmbReportMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Month", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
-        cmbReportMonth.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbReportMonthActionPerformed(evt);
-            }
-        });
 
         cmbReportYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Year", "2022" }));
 
@@ -511,18 +496,6 @@ public class ManagerMain extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnGenerateReportActionPerformed
-
-    private void cmbBookingMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBookingMonthActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbBookingMonthActionPerformed
-
-    private void cmbBookingCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBookingCustomerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbBookingCustomerActionPerformed
-
-    private void cmbReportMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbReportMonthActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbReportMonthActionPerformed
 
     private void btnBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookingActionPerformed
         // TODO add your handling code here:
